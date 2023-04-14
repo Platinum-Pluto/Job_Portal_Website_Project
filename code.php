@@ -156,17 +156,13 @@ if(isset($_POST['signup']))
 
     $query = "INSERT INTO applicant (NID,Email,User_Name,Password,City) 
     VALUES ('$NID','$Email','$User_Name','$Password','$City')";
-
     $query_run = mysqli_query($con, $query);
+
     if($query_run)
     {
         $_SESSION['message'] = "Account Has Been Created Successfully";
         $user = 1;
-        $query_result = mysqli_query($con, "SELECT User_ID, City FROM applicant WHERE NID='$NID'");
-        $row = mysqli_fetch_assoc($query_result);
-        $userID = $row['User_ID'];
-        $city = $row['City'];
-        $cityy = $city;
+        storeData($User_Name,$Password);
         header("Location: uIndex.php");
         exit(0);
     }
@@ -194,10 +190,7 @@ if(isset($_POST['userLogin']))
         $_SESSION['message'] = "Login Succesful";
         $admin = 0;
         $user = 1;
-        $row = mysqli_fetch_assoc($query_run);
-        $userID = $row['User_ID'];
-        $city = $row['City'];
-        $cityy =$city;
+        storeData($User_Name,$Password);
         header("Location: uIndex.php");
         exit(0);
     }
@@ -219,10 +212,7 @@ if(isset($_POST['userLogout']))
     {
         $admin = 0;
         $user = 0;
-        $userID = -5;
-        $city = -5;
-
-        $cityy = -5;
+        loggedOut();
         $_SESSION['message'] = "Logout Succesful";
         header("Location: index.php");
         exit(0);
@@ -239,20 +229,28 @@ if(isset($_POST['userLogout']))
 
 
 //User page codes starts here
-if($user == 1){
+//if($user == 1){
 
 
     //Discover_Apply
     if(isset($_POST['application']))
     {
-        $Job_ID = mysqli_real_escape_string($con, $_POST['Job_ID']);
+        $Job_ID = mysqli_real_escape_string($con, $_POST['application']);
         $Status = 1;
         $Notify_user = 1;
         $Notify_admin = 1;
-        $query = "INSERT INTO apply (Job_ID,User_ID,Stat,Notify_user,Notify_admin) 
+        $res = applying();
+        if($res->num_rows > 0) {
+            foreach($res as $results){
+                $userID = $results['User_ID'];
+             }
+          
+          }
+        $query = "INSERT INTO apply (Job_ID,User_ID,Status,Notify_user,Notify_admin) 
         VALUES ('$Job_ID','$userID','$Status','$Notify_user','$Notify_admin')";
-    
         $query_run = mysqli_query($con, $query);
+
+
         if($query_run)
         {
             $_SESSION['message'] = "Applied Successfully";
@@ -271,11 +269,18 @@ if($user == 1){
      //FindSalary Apply
      if(isset($_POST['application1']))
      {
-         $Job_ID = mysqli_real_escape_string($con, $_POST['Job_ID']);
+         $Job_ID = mysqli_real_escape_string($con, $_POST['application1']);
          $Status = 1;
          $Notify_user = 1;
          $Notify_admin = 1;
-         $query = "INSERT INTO apply (Job_ID,User_ID,Stat,Notify_user,Notify_admin) 
+         $res = applying();
+         if($res->num_rows > 0) {
+             foreach($res as $results){
+                 $userID = $results['User_ID'];
+              }
+           
+           }
+         $query = "INSERT INTO apply (Job_ID,User_ID,Status,Notify_user,Notify_admin) 
          VALUES ('$Job_ID','$userID','$Status','$Notify_user','$Notify_admin')";
      
          $query_run = mysqli_query($con, $query);
@@ -296,10 +301,17 @@ if($user == 1){
      //City Apply
      if(isset($_POST['application2']))
      {
-         $Job_ID = mysqli_real_escape_string($con, $_POST['Job_ID']);
+         $Job_ID = mysqli_real_escape_string($con, $_POST['application2']);
          $Status = 1;
          $Notify_user = 1;
          $Notify_admin = 1;
+         $res = applying();
+         if($res->num_rows > 0) {
+             foreach($res as $results){
+                 $userID = $results['User_ID'];
+              }
+           
+           }
          $query = "INSERT INTO apply (Job_ID,User_ID,Status,Notify_user,Notify_admin) 
          VALUES ('$Job_ID','$userID','$Status','$Notify_user','$Notify_admin')";
      
@@ -319,30 +331,19 @@ if($user == 1){
      }
   
       
-  }
+  //}
   
-  else{
-      $_SESSION['message'] = "User Login Required To Apply";
-      header("Location: index.php");
-      exit(0);
-  }
+ // else{
+   //   $_SESSION['message'] = "User Login Required To Apply";
+     // header("Location: index.php");
+      //exit(0);
+  //}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  
 ?>
+
+
 
 
 

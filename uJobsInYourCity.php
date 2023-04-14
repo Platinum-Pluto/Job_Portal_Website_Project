@@ -91,9 +91,7 @@ require 'dbcon.php';
       </thead>
       <tbody>
         <?php 
-            
-            $searchCity = $cityy;
-            $result = searchCity($searchCity);
+            $result = jobsInYourcity();
             if($result->num_rows > 0) {
               echo "<h2>Matching Results: $result->num_rows Found</h2>";
               foreach($result as $results){
@@ -107,7 +105,7 @@ require 'dbcon.php';
                   <td><?= $results['Job_Description']; ?></td>
                   <td>
                   <form action="code.php" method="POST" class="d-inline">
-                      <button type="submit" name="application2" value="<?=$Job['Job_ID'];?>" class="btn btn-danger btn-sm">Apply Now</button>
+                      <button type="submit" name="application2" value="<?=$results['Job_ID'];?>" class="btn btn-danger btn-sm">Apply Now</button>
                   </form>                      
                   </td>
                   </tr>
@@ -148,6 +146,7 @@ require 'dbcon.php';
   </div>
 </footer>
 <!--  Footer End -->
+ 
     <script src="https://kit.fontawesome.com/b2e0266282.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
 </html>
