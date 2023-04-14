@@ -105,7 +105,7 @@ require 'dbcon.php';
         <?php 
            if(isset($_POST['search'])) {
             $searchSal = $_POST['searchSal'];
-            $result = searchSalary($searchSal);
+            $result = usearchSalary($searchSal);
             if($result->num_rows > 0) {
               echo "<h2>Matching Results: $result->num_rows Found</h2>";
               foreach($result as $results){

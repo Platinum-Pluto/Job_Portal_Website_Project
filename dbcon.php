@@ -9,24 +9,48 @@ if(!$con){
 
 function searchDatabase($searchTerm) {
     global $con;
-    $sql = "SELECT * FROM jobs WHERE (Location LIKE '%$searchTerm%' OR Job_Title LIKE '%$searchTerm%' OR Job_Description LIKE '%$searchTerm%' OR Company_Name LIKE '%$searchTerm%' OR Qualification LIKE '%$searchTerm%') AND jobs.Job_ID NOT IN (SELECT Job_ID FROM apply)";
+    $sql = "SELECT * FROM jobs WHERE (Location LIKE '%$searchTerm%' OR Job_Title LIKE '%$searchTerm%' OR Job_Description LIKE '%$searchTerm%' OR Company_Name LIKE '%$searchTerm%' OR Qualification LIKE '%$searchTerm%')";
     $result = $con->query($sql);
     return $result;
   }
 
   function searchSalary($searchSal) {
     global $con;
-    $sql = "SELECT * FROM jobs WHERE Salary LIKE '%$searchSal%' AND jobs.Job_ID NOT IN (SELECT Job_ID FROM apply)";
+    $sql = "SELECT * FROM jobs WHERE Salary LIKE '%$searchSal%'";
     $result = $con->query($sql);
     return $result;
   }
 
   function searchCity($searchCity) {
     global $con;
+    $sql = "SELECT * FROM jobs WHERE Location LIKE '%$searchCity%'";
+    $result = $con->query($sql);
+    return $result;
+  }
+
+
+  function usearchDatabase($searchTerm) {
+    global $con;
+    $sql = "SELECT * FROM jobs WHERE (Location LIKE '%$searchTerm%' OR Job_Title LIKE '%$searchTerm%' OR Job_Description LIKE '%$searchTerm%' OR Company_Name LIKE '%$searchTerm%' OR Qualification LIKE '%$searchTerm%') AND jobs.Job_ID NOT IN (SELECT Job_ID FROM apply)";
+    $result = $con->query($sql);
+    return $result;
+  }
+
+  function usearchSalary($searchSal) {
+    global $con;
+    $sql = "SELECT * FROM jobs WHERE Salary LIKE '%$searchSal%' AND jobs.Job_ID NOT IN (SELECT Job_ID FROM apply)";
+    $result = $con->query($sql);
+    return $result;
+  }
+
+  function usearchCity($searchCity) {
+    global $con;
     $sql = "SELECT * FROM jobs WHERE Location LIKE '%$searchCity%' AND jobs.Job_ID NOT IN (SELECT Job_ID FROM apply)";
     $result = $con->query($sql);
     return $result;
   }
+
+
 
   function stillLoggedin(){
     global $con;
@@ -70,7 +94,7 @@ function searchDatabase($searchTerm) {
     if ($res->num_rows > 0) {
         $row = $res->fetch_assoc();
         $CITY = $row['City'];
-        $val = searchCity($CITY);
+        $val = usearchCity($CITY);
         return $val;
         }
   }

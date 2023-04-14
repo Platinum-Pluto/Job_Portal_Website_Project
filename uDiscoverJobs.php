@@ -105,7 +105,7 @@ require 'dbcon.php';
         <?php 
            if(isset($_POST['search'])) {
             $searchTerm = $_POST['searchTerm'];
-            $result = searchDatabase($searchTerm);
+            $result = usearchDatabase($searchTerm);
             if($result->num_rows > 0) {
               echo "<h2>Matching Results: $result->num_rows Found</h2>";
               foreach($result as $results){

@@ -134,6 +134,9 @@ if(isset($_POST['adminLogout']))
     }
 }
 
+
+
+
 if($admin == 0){
 
 
@@ -141,6 +144,64 @@ if($admin == 0){
 
     
 }
+
+
+if(isset($_POST['accept']))
+    {
+        $buttonVal = $_POST['accept'];
+        $buttonVals = explode('|', $buttonVal); 
+        $Job_ID = $buttonVals[0];
+        $Email = $buttonVals[1];
+    
+        $query = "UPDATE apply
+        JOIN applicant ON apply.User_ID = applicant.User_ID
+        SET apply.Status = '2', apply.Notify_user = '2'
+        WHERE apply.Job_ID ='$Job_ID' AND applicant.Email = '$Email'";
+        $query_run = mysqli_query($con, $query);
+    
+        if($query_run)
+        {
+            $_SESSION['message'] = "Accepted";
+            header("Location: List_of_Applicants.php");
+            exit(0);
+        }
+        else
+        {
+            $_SESSION['message'] = "Invalid";
+            header("Location: List_of_Applicants.php");
+            exit(0);
+        }
+    }
+
+    if(isset($_POST['reject']))
+    {
+        $buttonVal = $_POST['reject'];
+        $buttonVals = explode('|', $buttonVal); 
+        $Job_ID = $buttonValues[0];
+        $User_ID = $buttonValues[1];
+    
+        $query = "UPDATE apply SET Status = '0', Notify_user = '2' WHERE Job_ID ='$Job_ID' AND User_ID = '$User_ID'";
+        $query_run = mysqli_query($con, $query);
+    
+        if($query_run)
+        {
+            $_SESSION['message'] = "Rejected";
+            header("Location: List_of_Applicants.php");
+            exit(0);
+        }
+        else
+        {
+            $_SESSION['message'] = "Invalid";
+            header("Location: List_of_Applicants.php");
+            exit(0);
+        }
+    }
+
+
+
+
+
+
 
 
 

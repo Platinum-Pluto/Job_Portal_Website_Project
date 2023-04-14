@@ -55,3 +55,7 @@ CREATE TABLE Temp
 )
 
 
+//Status = 2 means accepted, 1 means Pending, 0 means rejected
+//Status can be used to extract a list of Jobs and their accepted candidates for interviews
+//Notify_user = 1 means already seen Notification, 2 means did not see Notification, 0 means clear Notification history
+//Notify_admin = 2 means seen, 1 means unseen, 0 means cleared

@@ -97,10 +97,12 @@
                                     </thead>
                                     <tbody>
                                         <?php 
-                                            $query = "SELECT * FROM applicant INNER JOIN apply ON apply.Job_ID = ".$Job['Job_ID']." AND applicant.User_ID = apply.User_ID";
+                                            $query = "SELECT * FROM applicant INNER JOIN apply ON apply.Job_ID = ".$Job['Job_ID']." AND applicant.User_ID = apply.User_ID AND apply.Status ='1'";
                                             $query_run = mysqli_query($con, $query);
                                             if(mysqli_num_rows($query_run) > 0){
-                                                foreach($query_run as $applicant){ ?>
+                                                foreach($query_run as $applicant){ 
+                                                  $U_ID = $applicant['User_ID'];
+                                                  ?>
                                                     <tr>
                                                         <td>
                                                             <a href="#" data-toggle="modal" data-target="#applicantModal<?php echo $applicant['User_ID']; ?>"><?php echo $applicant['User_Name']; ?></a>
@@ -109,8 +111,10 @@
                                                         <td><a href="#">Download Resume</a></td>
                                                         <td>
                                                             <div class="btn-group" role="group">
-                                                                <button type="button" class="btn btn-success">Accept</button>
-                                                                <button type="button" class="btn btn-danger">Reject</button>
+                                                            <form action="code.php" method="POST" class="d-inline">
+                                                            <button type="submit" name="accept" value="<?=$applicant['Job_ID'].'|'.$applicant['Email'];?>" class="btn btn-success">Accept</button>
+                                                            <button type="submit" name="reject" value="<?=$applicant['Job_ID'].'|'.$applicant['Email'];?>" class="btn btn-danger">Reject</button>
+                                                            </form>  
                                                             </div>
                                                         </td>
                                                     </tr>
