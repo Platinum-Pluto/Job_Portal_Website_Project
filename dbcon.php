@@ -9,21 +9,21 @@ if(!$con){
 
 function searchDatabase($searchTerm) {
     global $con;
-    $sql = "SELECT * FROM jobs WHERE Location LIKE '%$searchTerm%' OR Job_Title LIKE '%$searchTerm%' OR Job_Description LIKE '%$searchTerm%' OR Company_Name LIKE '%$searchTerm%' OR Qualification LIKE '%$searchTerm%' ";
+    $sql = "SELECT * FROM jobs WHERE (Location LIKE '%$searchTerm%' OR Job_Title LIKE '%$searchTerm%' OR Job_Description LIKE '%$searchTerm%' OR Company_Name LIKE '%$searchTerm%' OR Qualification LIKE '%$searchTerm%') AND jobs.Job_ID NOT IN (SELECT Job_ID FROM apply)";
     $result = $con->query($sql);
     return $result;
   }
 
   function searchSalary($searchSal) {
     global $con;
-    $sql = "SELECT * FROM jobs WHERE Salary LIKE '%$searchSal%'";
+    $sql = "SELECT * FROM jobs WHERE Salary LIKE '%$searchSal%' AND jobs.Job_ID NOT IN (SELECT Job_ID FROM apply)";
     $result = $con->query($sql);
     return $result;
   }
 
   function searchCity($searchCity) {
     global $con;
-    $sql = "SELECT * FROM jobs WHERE Location LIKE '%$searchCity%'";
+    $sql = "SELECT * FROM jobs WHERE Location LIKE '%$searchCity%' AND jobs.Job_ID NOT IN (SELECT Job_ID FROM apply)";
     $result = $con->query($sql);
     return $result;
   }
@@ -35,9 +35,9 @@ function searchDatabase($searchTerm) {
     return $result;
   }
 
-  function storeData($User_Name, $Password) {
+  function storeData($Email, $Password) {
     global $con;
-    $sql0 = "SELECT User_ID, City, Password FROM applicant WHERE User_Name = '$User_Name' AND Password = '$Password'";
+    $sql0 = "SELECT User_ID, City, Password FROM applicant WHERE Email = '$Email' AND Password = '$Password'";
     $res = $con->query($sql0);
     if ($res->num_rows > 0) {
         $row = $res->fetch_assoc();
@@ -74,5 +74,9 @@ function searchDatabase($searchTerm) {
         return $val;
         }
   }
+
+
+ 
+
 
 ?>

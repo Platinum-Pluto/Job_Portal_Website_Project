@@ -76,7 +76,7 @@ require 'dbcon.php';
 	<div class="container">
 		<h1>Login</h1>
 		<form action="code.php" method="POST">
-			<input type="text" name="User_Name" placeholder="Username">
+			<input type="text" name="Email" placeholder="Email">
 			<input type="password" name="Password" placeholder="Password">
 			<button type="submit"  name="userLogin" class="btn btn-primary">Login</button>
 		</form>

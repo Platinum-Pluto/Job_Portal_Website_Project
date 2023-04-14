@@ -162,7 +162,7 @@ if(isset($_POST['signup']))
     {
         $_SESSION['message'] = "Account Has Been Created Successfully";
         $user = 1;
-        storeData($User_Name,$Password);
+        storeData($Email,$Password);
         header("Location: uIndex.php");
         exit(0);
     }
@@ -180,9 +180,9 @@ if(isset($_POST['signup']))
 if(isset($_POST['userLogin']))
 {
    
-    $User_Name = mysqli_real_escape_string($con, $_POST['User_Name']);
+    $Email = mysqli_real_escape_string($con, $_POST['Email']);
     $Password = mysqli_real_escape_string($con, $_POST['Password']);
-    $query = "SELECT * FROM applicant WHERE User_Name = '$User_Name' AND Password = '$Password'";
+    $query = "SELECT * FROM applicant WHERE Email = '$Email' AND Password = '$Password'";
     $query_run = mysqli_query($con, $query);
 
     if(mysqli_num_rows($query_run) > 0)
@@ -190,7 +190,7 @@ if(isset($_POST['userLogin']))
         $_SESSION['message'] = "Login Succesful";
         $admin = 0;
         $user = 1;
-        storeData($User_Name,$Password);
+        storeData($Email,$Password);
         header("Location: uIndex.php");
         exit(0);
     }
@@ -319,13 +319,13 @@ if(isset($_POST['userLogout']))
          if($query_run)
          {
              $_SESSION['message'] = "Applied Successfully";
-             header("Location: uJobInYourCity.php");
+             header("Location: uJobsInYourCity.php");
              exit(0);
          }
          else
          {
              $_SESSION['message'] = "Application Failed";
-             header("Location: uJobInYourCity.php");
+             header("Location: uJobsInYourCity.php");
              exit(0);
          }
      }

@@ -17,7 +17,7 @@ require 'dbcon.php';
     <title>Job search</title>
     <link rel="stylesheet" href="./css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
-
+    <script src="functions.js"></script>
 </head>
      <!-- <h1>This is the title </h1> -->
     <!-- Nav Bar Start -->
@@ -63,7 +63,7 @@ require 'dbcon.php';
                       <h3>|</h3>
                       <li class="nav-item">
                        <form action="code.php" method="POST">
-		                     <button type="submit"  name="userLogout" class="btn btn-primary">Log Out</button>
+		                     <button type="submit" name="userLogout" class="btn btn-primary">Log Out</button>
 		                   </form>
                       </li>
                         <h3>|</h3>
@@ -105,8 +105,8 @@ require 'dbcon.php';
                   <td><?= $results['Job_Description']; ?></td>
                   <td>
                   <form action="code.php" method="POST" class="d-inline">
-                      <button type="submit" name="application2" value="<?=$results['Job_ID'];?>" class="btn btn-danger btn-sm">Apply Now</button>
-                  </form>                      
+                  <button type="submit" name="application2" value="<?=$results['Job_ID'];?>" class="btn btn-danger btn-sm">Apply Now</button>
+                  </form>                            
                   </td>
                   </tr>
                  <?php
