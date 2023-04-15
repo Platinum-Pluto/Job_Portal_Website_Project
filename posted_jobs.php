@@ -89,6 +89,8 @@
                                     <th>Location</th>
                                     <th>Salary</th>
                                     <th>Qualification</th>
+                                    <th>Interview Date</th>
+                                    <th>Interview Time</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -109,6 +111,8 @@
                                                 <td><?= $Job['Location']; ?></td>
                                                 <td><?= $Job['Salary']; ?></td>
                                                 <td><?= $Job['Qualification']; ?></td>
+                                                <td><?= $Job['Interview_Date']; ?></td>
+                                                <td><?= $Job['Interview_Time']; ?></td>
                                                 <td>
                                                     <a href="view_job.php?Job_ID=<?= $Job['Job_ID']; ?>" class="btn btn-info btn-sm">View</a>
                                                     <form action="code.php" method="POST" class="d-inline">

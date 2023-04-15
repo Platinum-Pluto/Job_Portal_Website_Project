@@ -108,7 +108,13 @@
                                                             <a href="#" data-toggle="modal" data-target="#applicantModal<?php echo $applicant['User_ID']; ?>"><?php echo $applicant['User_Name']; ?></a>
                                                         </td>
                                                         <td><?= $applicant['Email']; ?></td>
-                                                        <td><a href="#">Download Resume</a></td>
+                                                   <!-- <td><a href="#">Download Resume</a></td>-->
+                                                        <td>
+                                                        <form action="code.php" method="POST" class="d-inline">
+                                                            <button type="submit" name="downloadResume" value="<?=$applicant['Job_ID'].'|'.$applicant['User_ID'];?>" class="btn btn-success">Download</button>
+                                                        </form>  
+                                                        </td>
+
                                                         <td>
                                                             <div class="btn-group" role="group">
                                                             <form action="code.php" method="POST" class="d-inline">

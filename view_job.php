@@ -105,6 +105,16 @@ require 'dbcon.php';
                                 <label for="jobDescription">Job Description</label>
                                 <textarea class="form-control" name="Job_Description" rows="5"><?= $job['Job_Description']; ?></textarea>
                            </div>
+
+                           <div class="form-group">
+                            <label for="interviewDate">Interview Date</label>
+                            <input type="date" class="form-control" name="interviewDate" placeholder="Enter interview date">
+                           </div>
+                           <div class="form-group">
+                            <label for="interviewTime">Interview Time</label>
+                            <input type="time" class="form-control" name="interviewTime" placeholder="Enter interview time">
+                           </div>
+
                                              
                            <div class="mb-3">
                                <button type="submit" name="update_job" value="<?=$Job['Job_ID'];?>" class="btn btn-primary">

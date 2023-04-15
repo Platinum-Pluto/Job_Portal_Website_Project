@@ -44,8 +44,10 @@ if($admin != 0){
         $salary = mysqli_real_escape_string($con, $_POST['Salary']);
         $qualification = mysqli_real_escape_string($con, $_POST['Qualification']);
         $jobDescription = mysqli_real_escape_string($con, $_POST['Job_Description']);
+        $interviewDate = mysqli_real_escape_string($con, $_POST['interviewDate']);
+        $interviewTime = mysqli_real_escape_string($con, $_POST['interviewTime']);
     
-        $query = "UPDATE jobs SET Job_Title  ='$jobTitle', Company_Name ='$companyName', Location ='$location', Salary  ='$salary', Qualification = '$qualification', Job_Description = '$jobDescription' WHERE Job_ID ='$Job_ID' ";
+        $query = "UPDATE jobs SET Job_Title  ='$jobTitle', Company_Name ='$companyName', Location ='$location', Salary  ='$salary', Qualification = '$qualification', Job_Description = '$jobDescription',  Interview_Date = '$interviewDate', Interview_Time = '$interviewTime' WHERE Job_ID ='$Job_ID' ";
         $query_run = mysqli_query($con, $query);
     
         if($query_run)
@@ -72,10 +74,12 @@ if($admin != 0){
         $salary = mysqli_real_escape_string($con, $_POST['salary']);
         $qualification = mysqli_real_escape_string($con, $_POST['qualification']);
         $jobDescription = mysqli_real_escape_string($con, $_POST['jobDescription']);
+        $interviewDate = mysqli_real_escape_string($con, $_POST['interviewDate']);
+        $interviewTime = mysqli_real_escape_string($con, $_POST['interviewTime']);
     
-        $query = "INSERT INTO jobs (Job_Title,Job_Description,Salary,Location,Company_Name,Qualification) 
-        VALUES ('$jobTitle','$jobDescription','$salary','$location','$companyName','$qualification')";
-    
+        $query = "INSERT INTO jobs (Job_Title,Job_Description,Salary,Location,Company_Name,Qualification,Interview_Date,Interview_Time) 
+        VALUES ('$jobTitle','$jobDescription','$salary','$location','$companyName','$qualification','$interviewDate','$interviewTime')";
+
         $query_run = mysqli_query($con, $query);
         if($query_run)
         {
@@ -403,50 +407,82 @@ if(isset($_POST['userLogout']))
 
 
 
-  if(isset($_FILES['file']) && $_FILES['file']['error'] == 0){
 
-    // Get the user ID from the form data
+
+
+  if(isset($_FILES['file']) && $_FILES['file']['error'] == 0){
+    
 
     $sql1 = "SELECT User_ID FROM temp";
-    $U_ID = $con->query($sql1);
-    if($U_ID->num_rows > 0){
-      $row = $U_ID->fetch_assoc();
-      $ID = $row['User_ID'];
-    }
-    $User_ID = $ID;
-
-    $sql2 = "DELETE FROM form_data WHERE form_data.User_ID IN (SELECT temp.User_ID FROM temp)";
-    $con->query($sql2);
-
-    // Get the file name and contents
-    $file_name = $_FILES['file']['name'];
-    $file_contents = file_get_contents($_FILES['file']['tmp_name']);
-
-    // Add the file to the database
-    $sql = "INSERT INTO form_data (User_ID, file_name, submitted_on) VALUES (?, ?, ?)";
-    $stmt = $con->prepare($sql);
-    $submitted_on = date('Y-m-d H:i:s');
-    $stmt->bind_param("sss", $User_ID, $file_name, $submitted_on);
-
-    $stmt->execute();
-
-
-    // Check if the query was successful
-    if($stmt->affected_rows > 0){
-        // Get the ID of the newly added record
-        $new_id = $stmt->insert_id;
-
-        // Save the file to disk
-        move_uploaded_file($_FILES['file']['tmp_name'], 'uploads/' . $new_id . '_' . $file_name);
-
-        echo 'Uploaded';
+        $U_ID = $con->query($sql1);
+        if($U_ID->num_rows > 0){
+          $row = $U_ID->fetch_assoc();
+          $ID = $row['User_ID'];
+        }
+    
+        $User_ID = $ID;
+        $sql2 = "DELETE FROM form_data WHERE form_data.User_ID IN (SELECT temp.User_ID FROM temp)";
+        $con->query($sql2);
+    
+        $file_name = $_FILES['file']['name'];
+    
+        $file_contents = file_get_contents($_FILES['file']['tmp_name']);
+        $sql = "INSERT INTO form_data (User_ID, file_name, file_content, submitted_on) VALUES (?, ?, ?, ?)";
+        $stmt = $con->prepare($sql);
+        $submitted_on = date('Y-m-d H:i:s');
+        $stmt->bind_param("isss", $User_ID, $file_name, $file_contents, $submitted_on);
+    
+         $stmt->execute();
+    
+        if($stmt->affected_rows > 0){
+            $new_id = $stmt->insert_id;
+            move_uploaded_file($_FILES['file']['tmp_name'], 'uploads/' . $new_id . '_' . $file_name);
+            echo 'Uploaded';
+        }else{
+            echo 'Error';
+        }
     }else{
         echo 'Error';
     }
 
-}else{
-    echo 'Error';
-}
+
+
+    if(isset($_POST['downloadResume']))
+    {
+           $buttonVal = $_POST['downloadResume'];
+        $buttonVals = explode('|', $buttonVal); 
+        $Job_ID = $buttonVals[0];
+        $User_ID = $buttonVals[1];
+    
+        $sql = "SELECT User_ID, file_name FROM form_data WHERE User_ID = ?";
+        $stmt = $con->prepare($sql);
+        $stmt->bind_param("i", $User_ID);
+        $stmt->execute();
+        $result = $stmt->get_result();
+    
+        if ($result->num_rows == 1) {
+            $row = $result->fetch_assoc();
+            $file_name = $row['file_name'];
+            $User_ID = $row['User_ID'];
+            $file_content = $row['file_content'];
+    
+            header('Content-Description: File Transfer');
+            header('Content-Type: application/octet-stream');
+            header('Content-Disposition: attachment; filename="Job_ID-'.$Job_ID.'_User_ID-'.$User_ID.'.pdf"');
+            header('Content-Transfer-Encoding: Binary');
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate');
+            header('Pragma: public');
+            header('Content-Length: ' . strlen($file_content));
+            echo $file_content;
+            exit;
+        }
+    }
+
+
+
+
+
 
 
 
