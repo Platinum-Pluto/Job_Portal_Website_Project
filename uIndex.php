@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="./css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="functions.js"></script>
 </head>
     <!-- <h1>This is the title </h1> -->
     <!-- Nav Bar Start -->
@@ -55,6 +57,13 @@
                       </li>
                     <li class="nav-item">
                    <a class="nav-link link-success" href="#">Upload your resume </a>
+
+                   <form id="upload-form" action="code.php" method="POST" enctype="multipart/form-data">
+                   <input type="file" name="file" id="file">
+                   <input type="submit" value="Upload">
+                  </form>
+                    <div id="message"></div>
+
                       
                     </li>
 

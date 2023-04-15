@@ -401,6 +401,55 @@ if(isset($_POST['userLogout']))
   //}
 
 
+
+
+  if(isset($_FILES['file']) && $_FILES['file']['error'] == 0){
+
+    // Get the user ID from the form data
+
+    $sql1 = "SELECT User_ID FROM temp";
+    $U_ID = $con->query($sql1);
+    if($U_ID->num_rows > 0){
+      $row = $U_ID->fetch_assoc();
+      $ID = $row['User_ID'];
+    }
+    $User_ID = $ID;
+
+    $sql2 = "DELETE FROM form_data WHERE form_data.User_ID IN (SELECT temp.User_ID FROM temp)";
+    $con->query($sql2);
+
+    // Get the file name and contents
+    $file_name = $_FILES['file']['name'];
+    $file_contents = file_get_contents($_FILES['file']['tmp_name']);
+
+    // Add the file to the database
+    $sql = "INSERT INTO form_data (User_ID, file_name, submitted_on) VALUES (?, ?, ?)";
+    $stmt = $con->prepare($sql);
+    $submitted_on = date('Y-m-d H:i:s');
+    $stmt->bind_param("sss", $User_ID, $file_name, $submitted_on);
+
+    $stmt->execute();
+
+
+    // Check if the query was successful
+    if($stmt->affected_rows > 0){
+        // Get the ID of the newly added record
+        $new_id = $stmt->insert_id;
+
+        // Save the file to disk
+        move_uploaded_file($_FILES['file']['tmp_name'], 'uploads/' . $new_id . '_' . $file_name);
+
+        echo 'Uploaded';
+    }else{
+        echo 'Error';
+    }
+
+}else{
+    echo 'Error';
+}
+
+
+
   
 ?>
 
