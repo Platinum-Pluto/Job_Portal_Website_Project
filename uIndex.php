@@ -1,5 +1,6 @@
 <?php
     session_start();
+    require 'dbcon.php';
 ?>
 
 
@@ -15,7 +16,7 @@
     <title>Job search</title>
     <link rel="stylesheet" href="./css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
-
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
     <!-- <h1>This is the title </h1> -->
     <!-- Nav Bar Start -->
@@ -53,11 +54,15 @@
                         <a class="nav-link link-danger" href="#">বাংলা </a>
                       </li>
                     <li class="nav-item">
-                      <a class="nav-link link-success" href="#">Upload your resume </a>
+                   <a class="nav-link link-success" href="#">Upload your resume </a>
+                      
                     </li>
+
                     <li class="nav-item">
-                      <a class="nav-link active link-danger" href="#">Notifications</a>
+                      <a class="nav-link active link-danger" href="#">Notifications (<?php echo notificationCounter();?>)</a>
                     </li>
+
+
                       <h3>|</h3>
                       <li class="nav-item">
                        <form action="code.php" method="POST">
@@ -72,8 +77,11 @@
       </nav>
     <!-- Nav Bar End -->
 
+
+   
+
    <body>
-            
+ 
   </body>
 <!-- Footer Start -->
 <footer>

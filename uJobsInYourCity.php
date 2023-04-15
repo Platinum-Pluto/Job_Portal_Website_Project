@@ -58,7 +58,7 @@ require 'dbcon.php';
                       <a class="nav-link link-success" href="#">Upload your resume </a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link active link-danger" href="#">Notifications</a>
+                      <a class="nav-link active link-danger" href="#">Notifications (<?php echo notificationCounter();?>)</a>
                     </li>
                       <h3>|</h3>
                       <li class="nav-item">

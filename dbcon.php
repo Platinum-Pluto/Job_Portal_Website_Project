@@ -101,6 +101,43 @@ function searchDatabase($searchTerm) {
 
 
  
+ function notificationCounter(){
+  global $con;
+  $sql = "SELECT * FROM temp";
+  $res = $con->query($sql);
+  if($res->num_rows > 0){
+    $sql1 = "SELECT COUNT(Status) AS Number FROM apply NATURAL JOIN temp WHERE apply.User_ID = temp.User_ID AND apply.Notify_user = '2'";
+    $count = $con->query($sql1);
+    if($count->num_rows > 0){
+      $row = $count->fetch_assoc();
+      $counter = $row['Number'];
+      return $counter;
+    }
+    else{
+      return 0;
+    }
+  }
+ }
+
+function notificationSeen(){
+  global $con;
+  $sql1 = "UPDATE apply SET apply.Notify_user = '1' WHERE apply.User_ID IN (SELECT temp.User_ID FROM temp WHERE temp.User_ID = apply.User_ID)";
+  $count = $con->query($sql1);
+}
+
+
+function notifications(){
+  global $con;
+  $sql = "SELECT * FROM apply NATURAL JOIN temp WHERE apply.User_ID = temp.User_ID AND apply.Notify_user = '2'";
+  $res = $con->query($sql);
+  if($res->num_rows > 0){
+      return $res;
+  }
+  else{
+    return 0;
+  }
+ }
+
 
 
 ?>

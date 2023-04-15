@@ -2,7 +2,6 @@
     session_start();
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -53,8 +52,10 @@
                         <a class="nav-link link-danger" href="#">বাংলা </a>
                       </li>
                     <li class="nav-item">
-                      <a class="nav-link link-success" href="#">Upload your resume </a>
+                    <a class="nav-link link-success" href="#">Upload your resume </a>
+                      
                     </li>
+
                     <li class="nav-item">
                       <a class="nav-link active link-danger" href="signup.php">Sign in </a>
                     </li>
