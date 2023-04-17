@@ -57,32 +57,6 @@ CREATE TABLE Temp
 )
 
 
-CREATE TABLE `form_data` (
-  `User_ID` int(6) NOT NULL,
-  `file_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `submitted_on` datetime NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`User_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-
-
-CREATE TABLE `form_data` (
-  `User_ID` int(6) NOT NULL,
-  `file_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `submitted_on` datetime NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`User_ID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
-
-CREATE TABLE IF NOT EXISTS `pdf_data` (
- `User_ID` int(6) NOT NULL,
-  `username` varchar(50) NOT NULL,
-  `filename` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
-
-
 
 CREATE TABLE files(
   User_ID int (6),

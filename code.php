@@ -181,10 +181,13 @@ if(isset($_POST['accept']))
     {
         $buttonVal = $_POST['reject'];
         $buttonVals = explode('|', $buttonVal); 
-        $Job_ID = $buttonValues[0];
-        $User_ID = $buttonValues[1];
+        $Job_ID = $buttonVals[0];
+        $Email = $buttonVals[1];
     
-        $query = "UPDATE apply SET Status = '0', Notify_user = '2' WHERE Job_ID ='$Job_ID' AND User_ID = '$User_ID'";
+        $query = "UPDATE apply
+        JOIN applicant ON apply.User_ID = applicant.User_ID
+        SET apply.Status = '0', apply.Notify_user = '2'
+        WHERE apply.Job_ID ='$Job_ID' AND applicant.Email = '$Email'";
         $query_run = mysqli_query($con, $query);
     
         if($query_run)
@@ -441,12 +444,14 @@ if (isset($_POST['submit'])) {
             // Insert file info into the database
             $sql = "INSERT INTO files (User_ID, file_name, file_path) VALUES ('$User_ID', '$fileName', '$targetFilePath')";
             if ($con->query($sql) === TRUE) {
-                echo "The file " . htmlspecialchars($fileName) . " has been uploaded.";
+                $message = "The file " . htmlspecialchars($fileName) . " has been uploaded.";
+                echo '<script>showMessage("' . $message . '");</script>';
                 header("Location: uIndex.php");
-
             } else {
                 echo "Error: " . $sql . "<br>" . $con->error;
             }
+            
+                                 
         } else {
             echo "Sorry, there was an error uploading your file.";
         }
@@ -456,6 +461,43 @@ if (isset($_POST['submit'])) {
 }
 
     
+
+
+
+if(isset($_POST['adminClear']))
+     {
+        // Execute the SQL query to clear all notifications
+    	$sql = "UPDATE apply SET Notify_admin = 0";
+    	$result = mysqli_query($con, $sql);
+
+    	if ($result) {
+        	echo "Notifications cleared successfully!";
+            header("Location: admin_notification.php");
+
+    	} else {
+        	echo "Error clearing notifications: " . mysqli_error($con);
+            header("Location: admin_notification.php");
+    	}
+    }
+
+
+
+
+    if(isset($_POST['userClear']))
+     {
+        // Execute the SQL query to clear all notifications
+    	$sql = "UPDATE apply SET Notify_user = 0";
+    	$result = mysqli_query($con, $sql);
+
+    	if ($result) {
+        	echo "Notifications cleared successfully!";
+            header("Location: uNotifications.php");
+    	} else {
+        	echo "Error clearing notifications: " . mysqli_error($con);
+            header("Location: uNotifications.php");
+    	}
+    }
+
 
 
 

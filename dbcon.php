@@ -121,25 +121,59 @@ function searchDatabase($searchTerm) {
 
 function notificationSeen(){
   global $con;
-  $sql1 = "UPDATE apply SET apply.Notify_user = '1' WHERE apply.User_ID IN (SELECT temp.User_ID FROM temp WHERE temp.User_ID = apply.User_ID)";
+  $sql1 = "UPDATE apply SET apply.Notify_user = '1' WHERE apply.Notify_user != '0' AND apply.User_ID IN (SELECT temp.User_ID FROM temp WHERE temp.User_ID = apply.User_ID)";
   $count = $con->query($sql1);
 }
 
 
 function notifications(){
   global $con;
-  $sql = "SELECT * FROM apply NATURAL JOIN temp WHERE apply.User_ID = temp.User_ID AND apply.Notify_user = '2'";
+  $sql = "SELECT * FROM apply JOIN temp ON apply.User_ID = temp.User_ID JOIN jobs ON apply.Job_ID = jobs.Job_ID WHERE apply.Notify_user = '1' OR apply.Notify_user = '2' ORDER BY Admin_ID DESC";
   $res = $con->query($sql);
-  if($res->num_rows > 0){
-      return $res;
-  }
-  else{
-    return 0;
-  }
+  return $res;
  }
 
 
-  //Changes here
+
+
+
+ function adminNotificationCounter(){
+  global $con;
+    $sql1 = "SELECT COUNT(Notify_admin) AS Number FROM apply WHERE apply.Notify_admin = '1'";
+    $count = $con->query($sql1);
+    if($count->num_rows > 0){
+      $row = $count->fetch_assoc();
+      $counter = $row['Number'];
+      return $counter;
+    }
+    else{
+      return 0;
+    }
+ }
+
+
+
+ function adminNotificationSeen(){
+  global $con;
+  $sql1 = "UPDATE apply SET apply.Notify_admin = '2' WHERE apply.Notify_admin != '0'";
+  $count = $con->query($sql1);
+}
+
+
+
+
+function adminNotifications(){
+  global $con;
+  $sql = "SELECT * FROM  apply JOIN applicant ON apply.User_ID = applicant.User_ID JOIN jobs ON apply.Job_ID = jobs.Job_ID WHERE apply.Notify_admin = '1' OR apply.Notify_admin = '2' ORDER BY Admin_ID DESC";
+  $res = $con->query($sql);
+  return $res;
+ }
+
+
+
+
+
+  
 function getFiles($user_id){
   global $con;
 $sql = "SELECT * FROM files WHERE User_ID = '$user_id' ";
