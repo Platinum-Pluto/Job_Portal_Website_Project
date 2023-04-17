@@ -55,14 +55,27 @@
                       <li class="nav-item">
                         <a class="nav-link link-danger" href="#">বাংলা </a>
                       </li>
+
+                   
                       
+                 
                     <li class="nav-item">
-                   <p class="nav-link link-success">Upload your resume </p>
+                    <p class="nav-link link-success">Upload your resume </p>
+
+                    <form action="code.php" method="post" enctype="multipart/form-data">
+                        <input type="file" name="uploadedFile" id="uploadedFile">
+                        <button type="submit" name="submit">Upload File</button>
+                    </form>
+
+                 <!--  
                    <form id="upload-form" action="code.php" method="POST" enctype="multipart/form-data">
                    <input type="file" name="file" id="file">
                    <input type="submit" value="Upload">
-                  </form>
-                    <div id="message"></div>     
+                  </form> 
+                    <div id="message"></div>   -->
+                    
+              
+
                     </li>
 
                     <li class="nav-item">

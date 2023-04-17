@@ -97,24 +97,35 @@
                                     </thead>
                                     <tbody>
                                         <?php 
+                                        //Changes here
+                                        //   $result = getFiles();
                                             $query = "SELECT * FROM applicant INNER JOIN apply ON apply.Job_ID = ".$Job['Job_ID']." AND applicant.User_ID = apply.User_ID AND apply.Status ='1'";
                                             $query_run = mysqli_query($con, $query);
                                             if(mysqli_num_rows($query_run) > 0){
                                                 foreach($query_run as $applicant){ 
                                                   $U_ID = $applicant['User_ID'];
+                                                  $result = getFiles($U_ID);
                                                   ?>
                                                     <tr>
                                                         <td>
                                                             <a href="#" data-toggle="modal" data-target="#applicantModal<?php echo $applicant['User_ID']; ?>"><?php echo $applicant['User_Name']; ?></a>
                                                         </td>
                                                         <td><?= $applicant['Email']; ?></td>
-                                                   <!-- <td><a href="#">Download Resume</a></td>-->
-                                                        <td>
-                                                        <form action="code.php" method="POST" class="d-inline">
-                                                            <button type="submit" name="downloadResume" value="<?=$applicant['Job_ID'].'|'.$applicant['User_ID'];?>" class="btn btn-success">Download</button>
-                                                        </form>  
-                                                        </td>
 
+                                                        
+
+
+                                                        <?php
+                                                        
+                                                        while ($row = $result->fetch_assoc()) {
+                                                                if($applicant['User_ID'] == $row['User_ID']){
+                                                                    echo "<td><a href=\"" . htmlspecialchars($row['file_path']) . "\" download>Download Resume</a></td>";  
+                                                                }  
+                                                            }
+                                                            ?>
+
+                                                
+                                                        
                                                         <td>
                                                             <div class="btn-group" role="group">
                                                             <form action="code.php" method="POST" class="d-inline">

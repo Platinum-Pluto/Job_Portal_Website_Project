@@ -31,7 +31,7 @@ function searchDatabase($searchTerm) {
 
   function usearchDatabase($searchTerm) {
     global $con;
-    $sql = "SELECT * FROM jobs WHERE (Location LIKE '%$searchTerm%' OR Job_Title LIKE '%$searchTerm%' OR Job_Description LIKE '%$searchTerm%' OR Company_Name LIKE '%$searchTerm%' OR Qualification LIKE '%$searchTerm%') AND jobs.Job_ID NOT IN (SELECT Job_ID FROM apply)";
+    $sql = "SELECT * FROM jobs WHERE (Location LIKE '%$searchTerm%' OR Job_Title LIKE '%$searchTerm%' OR Job_Description LIKE '%$searchTerm%' OR Company_Name LIKE '%$searchTerm%' OR Qualification LIKE '%$searchTerm%') AND jobs.Job_ID NOT IN (SELECT Job_ID FROM apply INNER JOIN temp ON temp.User_ID = apply.User_ID)";
     $result = $con->query($sql);
     return $result;
   }
@@ -137,6 +137,17 @@ function notifications(){
     return 0;
   }
  }
+
+
+  //Changes here
+function getFiles($user_id){
+  global $con;
+$sql = "SELECT * FROM files WHERE User_ID = '$user_id' ";
+$result = $con->query($sql);
+return $result;
+}
+
+
 
 
 

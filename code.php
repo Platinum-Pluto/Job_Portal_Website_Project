@@ -410,79 +410,52 @@ if(isset($_POST['userLogout']))
 
 
 
-  if(isset($_FILES['file']) && $_FILES['file']['error'] == 0){
-    
 
-    $sql1 = "SELECT User_ID FROM temp";
-        $U_ID = $con->query($sql1);
-        if($U_ID->num_rows > 0){
-          $row = $U_ID->fetch_assoc();
-          $ID = $row['User_ID'];
+  
+    
+// Check if the form was submitted
+if (isset($_POST['submit'])) {
+    $res = applying();
+    if($res->num_rows > 0) {
+        foreach($res as $results){
+            $User_ID = $results['User_ID'];
+         }
+      
+      }
+
+    $sql2 = "DELETE FROM files WHERE User_ID = '$User_ID'";
+    $query_run = mysqli_query($con, $sql2);
+
+
+
+    $targetDir = "uploads/";
+    $fileName = $User_ID . '_' . basename($_FILES["uploadedFile"]["name"]);
+    $targetFilePath = $targetDir . $fileName;
+    $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
+
+    // Allow certain file formats
+    $allowedExtensions = array("jpg", "jpeg", "png", "gif", "pdf", "txt", "doc", "docx");
+    if (in_array(strtolower($fileType), $allowedExtensions)) {
+        // Upload file to server
+        if (move_uploaded_file($_FILES["uploadedFile"]["tmp_name"], $targetFilePath)) {
+            // Insert file info into the database
+            $sql = "INSERT INTO files (User_ID, file_name, file_path) VALUES ('$User_ID', '$fileName', '$targetFilePath')";
+            if ($con->query($sql) === TRUE) {
+                echo "The file " . htmlspecialchars($fileName) . " has been uploaded.";
+                header("Location: uIndex.php");
+
+            } else {
+                echo "Error: " . $sql . "<br>" . $con->error;
+            }
+        } else {
+            echo "Sorry, there was an error uploading your file.";
         }
-    
-        $User_ID = $ID;
-        $sql2 = "DELETE FROM form_data WHERE form_data.User_ID IN (SELECT temp.User_ID FROM temp)";
-        $con->query($sql2);
-    
-        $file_name = $_FILES['file']['name'];
-    
-        $file_contents = file_get_contents($_FILES['file']['tmp_name']);
-        $sql = "INSERT INTO form_data (User_ID, file_name, file_content, submitted_on) VALUES (?, ?, ?, ?)";
-        $stmt = $con->prepare($sql);
-        $submitted_on = date('Y-m-d H:i:s');
-        $stmt->bind_param("isss", $User_ID, $file_name, $file_contents, $submitted_on);
-    
-         $stmt->execute();
-    
-        if($stmt->affected_rows > 0){
-            $new_id = $stmt->insert_id;
-            move_uploaded_file($_FILES['file']['tmp_name'], 'uploads/' . $new_id . '_' . $file_name);
-            echo 'Uploaded';
-        }else{
-            echo 'Error';
-        }
-    }else{
-        echo 'Error';
+    } else {
+        echo "Sorry, only JPG, JPEG, PNG, GIF, PDF, TXT, DOC, and DOCX files are allowed.";
     }
+}
 
-
-
-    if(isset($_POST['downloadResume']))
-    {
-           $buttonVal = $_POST['downloadResume'];
-        $buttonVals = explode('|', $buttonVal); 
-        $Job_ID = $buttonVals[0];
-        $User_ID = $buttonVals[1];
     
-        $sql = "SELECT User_ID, file_name FROM form_data WHERE User_ID = ?";
-        $stmt = $con->prepare($sql);
-        $stmt->bind_param("i", $User_ID);
-        $stmt->execute();
-        $result = $stmt->get_result();
-    
-        if ($result->num_rows == 1) {
-            $row = $result->fetch_assoc();
-            $file_name = $row['file_name'];
-            $User_ID = $row['User_ID'];
-            $file_content = $row['file_content'];
-    
-            header('Content-Description: File Transfer');
-            header('Content-Type: application/octet-stream');
-            header('Content-Disposition: attachment; filename="Job_ID-'.$Job_ID.'_User_ID-'.$User_ID.'.pdf"');
-            header('Content-Transfer-Encoding: Binary');
-            header('Expires: 0');
-            header('Cache-Control: must-revalidate');
-            header('Pragma: public');
-            header('Content-Length: ' . strlen($file_content));
-            echo $file_content;
-            exit;
-        }
-    }
-
-
-
-
-
 
 
 
