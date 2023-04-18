@@ -17,7 +17,12 @@ require 'dbcon.php';
     <title>Job search</title>
     <link rel="stylesheet" href="./css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
-
+    <script src="functions.js"></script>
+    <script>
+      function showMessage() {
+       alert("User Login Required");
+        }
+    </script>
 </head>
     <!-- <h1>This is the title </h1> -->
     <!-- Nav Bar Start -->
@@ -77,6 +82,7 @@ require 'dbcon.php';
 
 <body>
 
+
 <form method="POST">
 	<div class="input-group rounded">
 		<input type="text" class="form-control rounded" placeholder="Search Term" aria-label="Search" aria-describedby="search-addon" name="searchTerm">
@@ -119,9 +125,9 @@ require 'dbcon.php';
                   <td><?= $results['Qualification']; ?></td>
                   <td><?= $results['Job_Description']; ?></td>
                   <td>
-                  <form action="code.php" method="POST" class="d-inline">
-                      <button type="submit" name="application" value="<?=$Job['Job_ID'];?>" class="btn btn-danger btn-sm">Apply Now</button>
-                  </form>                      
+                 
+                      <button onclick="showMessage()" class="btn btn-danger btn-sm">Apply Now</button>
+                      
                   </td>
                   </tr>
                  <?php

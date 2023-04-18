@@ -27,7 +27,7 @@ require 'dbcon.php';
           <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active link-primary" aria-current="page" href="list.php">List Of Applicants</a>
+                <a class="nav-link active link-primary" aria-current="page" href="List_of_Applicants.php">List Of Applicants</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link active link-info" href="posted_jobs.php">Posted jobs</a>
@@ -36,9 +36,9 @@ require 'dbcon.php';
             <!-- Nav left side end  -->
             <span class="navbar-text">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  <li class="nav-item">
-                    <a class="nav-link link-danger" href="#">Notifications</a>
-                  </li>
+                <li class="nav-item">
+                      <a class="nav-link active link-danger" href="admin_notification.php">Notifications (<?php echo adminNotificationCounter();?>)</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link link-danger" href="#">English</a>
                       </li>
