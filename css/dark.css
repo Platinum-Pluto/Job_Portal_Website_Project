@@ -1,0 +1,88 @@
+/* Dark mode */
+body.dark-mode {
+  background-color: #000000;
+  color: #f2f2f2;
+}
+
+/* Navbar */
+.navbar-brand{
+    background-color: #f70000;
+    border-radius: 20px;
+    font-family: fantasy;
+}
+#navbarText{
+    font-size: 80%;
+    color: #f2f2f2;
+}
+ul li a:hover {
+    transform: scale(1.1);
+    text-decoration: underline;
+    font-size: 110%;
+    color: #f2f2f2;
+}
+
+/* Rounded */
+.rounded{
+    padding-left: 30%;
+    padding-right: 30%;
+    padding-top: 5%;
+    background-color: #000000;
+}
+
+/* Footer */
+footer{
+    background-color: #000000;
+    height: 250px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+}
+footer h1{
+    color: #f2f2f2;
+    font-family: 'Times New Roman', Times, serif;
+}
+.social {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    text-decoration: none;
+    border-radius: 50%;
+}
+hr{
+    width: 70%;
+    margin-bottom: 50px;
+    background-color: #f2f2f2;
+}
+
+footer .fotcontent{
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+}
+footer a{
+    text-decoration: none;
+    color: #f2f2f2;
+}
+footer a:hover{
+    font-size: 1.2em;
+    color: #2196F3;
+    font-weight: bold;
+    transition: 0.5s;
+}
+
+/* View */
+.view{
+    display:none;
+    margin-left: 20%;
+    margin-bottom: 10px;
+    padding: 20px;
+    background-color: #333333;
+    color: #f2f2f2;
+}
+
+
+
+

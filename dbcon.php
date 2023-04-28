@@ -183,6 +183,70 @@ return $result;
 
 
 
+//New Code From Here
+
+function getMode(){
+  global $con;
+  $sql = "SELECT switchmode FROM temp";
+  $result = $con->query($sql);
+  $row = $result->fetch_assoc(); 
+  return $row['switchmode']; 
+}
+
+
+function ugetNavMode(){
+  global $con;
+  $sql = "SELECT switchmode FROM temp";
+  $result = $con->query($sql);
+  $row = $result->fetch_assoc(); 
+  $switchmode = $row['switchmode'];  
+  if ($switchmode == "1") { 
+    echo ' class = "navbar navbar-expand-lg navbar-dark bg-dark"';
+  } else {
+    echo ' class = "navbar navbar-expand-lg bg-body-tertiary"';
+  }
+}
+
+function getNavMode(){
+  global $con;
+  $sql = "SELECT theme FROM settings";
+  $result = $con->query($sql);
+  $row = $result->fetch_assoc(); 
+  $switchmode = $row['theme'];  
+  if ($switchmode == "1") { 
+    echo ' class = "navbar navbar-expand-lg navbar-dark bg-dark"';
+  } else {
+    echo ' class = "navbar navbar-expand-lg bg-body-tertiary"';
+  }
+}
+
+
+
+function getLatest(){
+  global $con;
+  $sql = "SELECT * FROM jobs ORDER BY Job_ID DESC";
+  $result = $con->query($sql);
+  return $result;
+}
+
+function getLatestNews() {
+  global $con;
+  $sql = "SELECT * FROM jobs ORDER BY Job_ID DESC LIMIT 3";
+  $result = $con->query($sql);
+  $rows = array();
+  $companies = array(); // keep track of companies that have already been added
+  while ($row = $result->fetch_assoc()) {
+    $company_name = $row['Company_Name'];
+    if (!isset($companies[$company_name])) { // check if company has already been added
+      $rows[] = $row; // add row to result array
+      $companies[$company_name] = true; // mark company as added
+    }
+  }
+  return $rows;
+}
+
+
+
 
 
 ?>

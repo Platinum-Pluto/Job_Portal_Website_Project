@@ -14,11 +14,37 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Job search</title>
-    <link rel="stylesheet" href="./css/style.css">
+
+
+
+   <!-- <link rel="stylesheet" href="./css/style.css"> -->
+
+
+
+
+  <?php 
+
+  $switchmode = getMode();
+
+    if ($switchmode == "1") { 
+      echo '<link rel="stylesheet" href="./css/dark.css"/>';
+    } else {
+      echo '<link rel="stylesheet" href="./css/style.css"/>';
+    }
+  ?>
+
+
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="style.css">
     
     <script src="functions.js"></script>
+  
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
     
     
 </head>
@@ -95,7 +121,128 @@
    
 
    <body>
+
+  
+
+   <div class="container">
+      <div class="ticker">
+        <div class="title"><h5>Latest Feed</h5></div>
+        <div class="news">
+          <marquee>
+          <?php 
+          $value = getLatestNews();
+          $company_names = '';
+          $posts = '';
+          foreach ($value as $row) {
+            if (!empty($row['Company_Name'])) {
+                $company_names .= $row['Company_Name'] . ", ";
+                $posts .= $row['Job_Title'] . ", ";
+              }
+          }
+          $company_names = rtrim($company_names, ', ') . " are recruiting for the posts " . rtrim($posts, ', ');
+          echo "<p>" . $company_names . "</p>";
+          ?>
+          </marquee>
+        </div>
+      </div>
+    </div>
+
+
+    
+   <div>
+    <p><h1>Latest Job Circulars</h1></p>
+   </div>
+
+  
+
+   <div class="container">
+    <h1 class="text-center mb-4"></h1>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Job Title</th>
+          <th>Company Name</th>
+          <th>Location</th>
+          <th>Salary</th>
+          <th>Qualification</th>
+          <th>Job Description</th>
+          <th>Apply</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php 
+        $result = getLatest();
+
+            if($result->num_rows > 10) {
+              $i = 0;
+              
+              foreach($result as $results){
+                $i++;
+                if($i>10){
+                  break;
+                }
+                else{
+                  ?>
+                  <tr>
+                  <td><?= $results['Job_Title']; ?></td>
+                  <td><?= $results['Company_Name']; ?></td>
+                  <td><?= $results['Location']; ?></td>
+                  <td><?= $results['Salary']; ?></td>
+                  <td><?= $results['Qualification']; ?></td>
+                  <td><?= $results['Job_Description']; ?></td>
+                  <td>
+                  <form action="code.php" method="POST" class="d-inline">
+                  <button type="submit" name="application" value="<?=$results['Job_ID'];?>" class="btn btn-danger btn-sm">Apply Now</button>
+                  </form>                      
+                  </td>
+                  </tr>
+                 <?php
+                }
+                
+               }
+            
+            }
+           else if($result->num_rows < 10) {
+              $i = 0;
+              $val = $result->num_rows;
+              foreach($result as $results){
+                $i++;
+                if($i>$val){
+                  break;
+                }
+                else{
+                  ?>
+                  <tr>
+                  <td><?= $results['Job_Title']; ?></td>
+                  <td><?= $results['Company_Name']; ?></td>
+                  <td><?= $results['Location']; ?></td>
+                  <td><?= $results['Salary']; ?></td>
+                  <td><?= $results['Qualification']; ?></td>
+                  <td><?= $results['Job_Description']; ?></td>
+                  <td>
+                  <form action="code.php" method="POST" class="d-inline">
+                  <button type="submit" name="application" value="<?=$results['Job_ID'];?>" class="btn btn-danger btn-sm">Apply Now</button>
+                  </form>                      
+                  </td>
+                  </tr>
+                 <?php
+                }
+
+            }
+          }
+            else{
+              echo "<h2>No matching results found</h2>";
+            }
+         
+            
+          ?>
+      </tbody>
+    </table>
+  </div>
+  <!-- Bootstrap JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
  
+   
   </body>
 <!-- Footer Start -->
 <footer>

@@ -1,6 +1,5 @@
 <?php
     session_start();
-    require 'dbcon.php';
 ?>
 
 <!DOCTYPE html>
@@ -19,64 +18,67 @@
     <script src="script.js" defer></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
 
-
+  
 </head>
     <!-- <h1>This is the title </h1> -->
     <!-- Nav Bar Start -->
-    <nav <?php getNavMode() ?> >
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">Job Portal</a>
-          <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Job Portal</a>
+        <button class="navbar-toggler navbar-toggler-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarText">
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active link-primary" aria-current="page" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active link-info" href="discoverjobs.php">Discover jobs</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active link-success" href="jobsInYourCity.php">Jobs In your City</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active link-danger" href="findSalaries.php">Find Salaries</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active link-warning" href="contact.php">Contact</a>
-              </li>
+                <li class="nav-item">
+                    <a class="nav-link active text-primary" aria-current="page" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active text-info" href="discoverjobs.php">Discover jobs</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active text-success" href="jobsInYourCity.php">Jobs In your City</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active text-danger" href="findSalaries.php">Find Salaries</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active text-warning" href="contact.php">Contact</a>
+                </li>
             </ul>
-            <!-- Nav left side end  -->
             <span class="navbar-text">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link link-danger" href="#">English</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link link-danger" href="#">বাংলা </a>
-                      </li>
-                    <li class="nav-item">
-                    <a class="nav-link link-success" href="#">Upload your resume </a>
-                      
+                        <a class="nav-link text-danger" href="#">English</a>
                     </li>
-
                     <li class="nav-item">
-                      <a class="nav-link active link-danger" href="signup.php">Sign in </a>
+                        <a class="nav-link text-danger" href="#">বাংলা </a>
                     </li>
-                      <h3>|</h3>
                     <li class="nav-item">
-                        <a class="nav-link active link-warning " href="userlogin.php">Log in </a>
-                      </li>
+                        <a class="nav-link text-success" href="#">Upload your resume</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active text-danger" href="signup.php">Sign in</a>
+                    </li>
+                    <li class="nav-item">
                         <h3>|</h3>
-                      <li class="nav-item">
-                        <a class="nav-link link-info" href="Admin_index.php">Employers/Post job </a>
-                      </li>
-                  </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active text-warning" href="userlogin.php">Log in</a>
+                    </li>
+                    <li class="nav-item">
+                        <h3>|</h3>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-info" href="Admin_index.php">Employers/Post job</a>
+                    </li>
+                </ul>
             </span>
-          </div>
         </div>
-      </nav>
+    </div>
+</nav>
+
+
     <!-- Nav Bar End -->
 
 
