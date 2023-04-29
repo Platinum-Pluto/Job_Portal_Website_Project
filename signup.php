@@ -19,7 +19,8 @@ require 'dbcon.php';
 		}
 
 		body {
-			background-color: #f5f5f5;
+			background-color:azure;
+  opacity: 1;
 		}
 
 		.container {
@@ -31,7 +32,20 @@ require 'dbcon.php';
 			padding: 30px;
 			text-align: center;
 		}
-
+		button{
+			background-color: white;
+			color: black;
+			font-size: large;
+			border: 1px solid grey;
+			padding:8px;
+			padding-left: 30px;
+			padding-right: 30px;
+			border-radius: 5px;
+		}
+	button:hover {
+  background-color: grey; 
+  color: white;
+}
 		h1 {
 			color: #333;
 			font-size: 36px;
@@ -61,6 +75,7 @@ require 'dbcon.php';
 		form input[type="submit"]:hover {
 			background-color: #006F8F;
 		}
+	
 
 		@media screen and (max-width: 600px) {
 			.container {
@@ -79,8 +94,10 @@ require 'dbcon.php';
 			<input type="text"  name="User_Name" placeholder="Username">
 			<input type="text"  name="Password" placeholder="Password">
 			<input type="text" name="City" placeholder="City Name">
-			<button type="submit" name="signup" class="btn btn-primary">Create</button>
+			<button  type="submit" name="signup" class="btn">Create</button>
+
 		</form>
 	</div>
 </body>
+
 </html>

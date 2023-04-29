@@ -21,7 +21,7 @@
     <!-- Nav Bar Start -->
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">Job Portal</a>
+        <img style="margin-right:2%;" src="./img/logo.png" alt="">
           <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -40,16 +40,16 @@
                 <li class="nav-item">
                       <a class="nav-link active link-danger" href="admin_notification.php">Notifications (<?php echo adminNotificationCounter();?>)</a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link link-danger" href="#">English</a>
                       </li>
                       <li class="nav-item">
                         <a class="nav-link link-danger" href="#">বাংলা </a>
-                      </li>
+                      </li> -->
                       <h3>|</h3>
                     <li class="nav-item">
                        <form action="code.php" method="POST">
-		                     <button type="submit"  name="adminLogout" class="btn btn-primary">Log Out</button>
+		                     <button type="submit"  name="adminLogout" class="btn btn-danger">Log Out</button>
 		                   </form>
                       </li>
                         <h3>|</h3>
@@ -106,7 +106,7 @@
 
 
 
-        <button type="submit"  name="add_job" class="btn btn-primary">Post</button>
+        <button style="margin-left: 48%;padding-left:3%;padding-right:3%; font-size:larger" type="submit"  name="add_job" class="btn btn-primary">Post</button>
       </form>
     </div>
     <!-- Bootstrap JS -->
@@ -114,7 +114,10 @@
 
   </body>
 <!-- Footer Start -->
-<footer>
+<footer style="
+   bottom:0;margin-top:5px;
+   padding-top:5%;
+">
   <h1>Our Policy</h1>
   <div class="fotcontent">
       <a href="" class="fa-fade">Contract Us</a>

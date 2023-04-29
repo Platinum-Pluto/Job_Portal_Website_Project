@@ -28,17 +28,50 @@ require 'dbcon.php';
 			background-color: #fff;
 			border-radius: 10px;
 			box-shadow: 0 0 10px rgba(0,0,0,0.2);
-			margin: 50px auto;
-			max-width: 500px;
-			padding: 30px;
+			margin:10% 30%;
+			max-width: 40%;
+			padding: 50px;
 			text-align: center;
 		}
-
+		body {
+			background-color: lightsteelblue;
+  opacity: 1;
+		}
+		button{
+			background-color: white;
+			color: black;
+			font-size: large;
+			border: 1px solid green;
+			padding:8px;
+			padding-left: 30px;
+			padding-right: 30px;
+			border-radius: 5px;
+		}
+	button:hover {
+  background-color: green; /* Green */
+  color: white;
+}
 		h1 {
-			color: #333;
 			font-size: 36px;
 			margin-bottom: 30px;
 			text-transform: uppercase;
+  background-image: linear-gradient(
+    -225deg,
+    #231557 0%,
+    #44107a 29%,
+    #ff1361 67%,
+    #fff800 100%);
+	  background-size: auto auto;
+  background-clip: border-box;
+  background-size: 200% auto;
+  color: #fff;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  /* animation: textclip 2s linear infinite; */
+  display: inline-block;
+	  
+	  
 		}
 
 		form input {
