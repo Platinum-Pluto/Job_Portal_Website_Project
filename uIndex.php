@@ -152,9 +152,7 @@ h1{
    <body>
 <!-- <hr style="padding-left:100%"> -->
    <!-- <div style="color:blue;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;text-align:center;margin-bottom:10px;margin-top:10px" > -->
-   <h1>
-  Welcome To Job Portal
-</h1>
+ 
  
 
   </body>
