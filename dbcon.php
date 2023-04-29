@@ -183,7 +183,7 @@ return $result;
 
 
 
-//New Code From Here
+//New Code From Here For Navbar Light/Dark Mode And uIndex.php Page Code
 
 function getMode(){
   global $con;
