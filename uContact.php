@@ -19,6 +19,14 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
     <link rel="stylesheet" type="text/css" href="style.css">
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+	
+    
+
     <style>
 		.contact-box {
 			background-color: #f9f9f9;
@@ -58,6 +66,27 @@
   {
     width: 100%;
   }
+
+  .global_button {
+  background-color: transparent;
+  border-color: transparent;
+}
+.global_button i {
+  color: rgb(53, 137, 247);
+}
+.global_button:hover {
+background-color: transparent;
+border-color: transparent;
+box-shadow: none;
+}
+.global_button:focus {
+box-shadow: none !important;
+outline: none;
+background-color: transparent !important;
+    border-color: transparent !important;
+    outline-color: transparent !important;
+  
+}
 	</style>
   
 <head>
@@ -72,7 +101,7 @@
           <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active link-primary" aria-current="page" href="#">Home</a>
+                <a class="nav-link active link-primary" aria-current="page" href="uIndex.php">Home</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link active link-info" href="uDiscoverJobs.php">Discover jobs</a>
@@ -98,34 +127,39 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <!-- Google translate -->
-<div class="translate">
-  <div id="google_translate_element">
-    <div dir="ltr" class="skiptranslate goog-te-gadget">
-      <div id=":0.targetLanguage">
-        <!-- <select class="goog-te-combo"> -->
-    
-        <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+                        <div class="dropdown">
+		<button class="btn btn-secondary dropdown-toggle global_button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			<i class="bi bi-globe"></i>
+		</button>
+		<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="google_translate_element">
+		    <div dir="ltr" class="skiptranslate goog-te-gadget">
+		      	<span style="white-space: nowrap;">
+		        	<a class="goog-logo-link" href="http://translate.google.com" target="_blank">
+		        	</a>
+		      	</span>
+		    </div>
+	  	</div>
+	</div>
 
-        <!-- </select> -->
-      </div>
-      <!-- Powered by  -->
-      <!-- <span style="white-space: nowrap;"> -->
-        <!-- <a class="goog-logo-link" href="http://translate.google.com" target="_blank"> -->
-          <!-- <img style="padding-right: 3px;" src="http://www.google.com/images/logos/google_logo_41.png" width="37" height="13"> -->
-          <!-- Translate -->
-        </a>
-      </span>
-    </div>
-  </div>
-  <script>
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement({
-        pageLanguage: 'en'
-      }, 'google_translate_element');
-    }
-  </script>
- 
-</div>
+  	<script>
+		$(document).ready(function(){
+		    $('.dropdown-toggle').click(function(){
+		        $('#google_translate_element').toggle();
+		    });
+		});
+
+	    function googleTranslateElementInit() {
+	      	new google.translate.TranslateElement({
+	        	pageLanguage: 'en'
+	      	}, 'google_translate_element');
+	    }
+	</script>
+
+
+
+	<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+
 <!-- Google translate -->
                       </li>
                     

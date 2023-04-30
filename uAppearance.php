@@ -4,12 +4,15 @@
 ?>
 
 
-<!DOCTYPE html>
-<html lang="en">
 
-<!--Iftekhar-->
-<!--NOT DONE-->
+
+<!DOCTYPE html>
+<html>
 <head>
+
+
+	
+	
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,10 +29,17 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+ 
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 	
-    
-    
-    <style>
+
+
+<style>
           button{
 			background-color: white;
 			color: black;
@@ -79,14 +89,85 @@ background-color: transparent !important;
   
 }
 
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.left-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 200px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #7289da;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 20px; /* Add this line */
+}
+
+
+.nav-item.active {
+  background-color: #7289da;
+  color: #fff;
+}
+
+.right-content {
+  flex: 1;
+  margin-left: 40px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+label {
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+button[type="submit"] {
+  background-color: #7289da;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: #677bc4;
+}
+
+
     </style>
     <script src="functions.js"></script>
 
 
 </head>
-    <!-- <h1>This is the title </h1> -->
-    <!-- Nav Bar Start -->
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
         <img style="margin-right:2%;" src="./img/logo.png" alt="">
           <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -195,152 +276,119 @@ background-color: transparent !important;
 
 
 
-   <body>
 
-   <div class="container">
-      <div class="ticker">
-        <div class="title"><p><h4>Latest Feed</h4></p></div>
-        <div class="news">
-          <marquee>
-          <?php 
-          $value = getLatestNews();
-          $company_names = '';
-          $posts = '';
-          foreach ($value as $row) {
-            if (!empty($row['Company_Name'])) {
-                $company_names .= $row['Company_Name'] . ", ";
-                $posts .= $row['Job_Title'] . ", ";
-              }
-          }
-          $company_names = rtrim($company_names, ', ') . " are recruiting for the posts " . rtrim($posts, ', ');
-          echo "<p>" . $company_names . "</p>";
-          ?>
-          </marquee>
-        </div>
-      </div>
-    </div>
+<body>
 
 
-    
-   <div>
-    <p><h1>Latest Job Circulars</h1></p>
-   </div>
 
-  
 
-   <div class="container">
-    <h1 class="text-center mb-4"></h1>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Job Title</th>
-          <th>Company Name</th>
-          <th>Location</th>
-          <th>Salary</th>
-          <th>Qualification</th>
-          <th>Job Description</th>
-          <th>Apply</th>
-        </tr>
-      </thead>
-      <tbody>
-        <?php 
-        $result = getLatest();
 
-            if($result->num_rows > 10) {
-              $i = 0;
-              
-              foreach($result as $results){
-                $i++;
-                if($i>10){
-                  break;
-                }
-                else{
-                  ?>
-                  <tr>
-                  <td><?= $results['Job_Title']; ?></td>
-                  <td><?= $results['Company_Name']; ?></td>
-                  <td><?= $results['Location']; ?></td>
-                  <td><?= $results['Salary']; ?></td>
-                  <td><?= $results['Qualification']; ?></td>
-                  <td><?= $results['Job_Description']; ?></td>
-                  <td>
-                  <form action="code.php" method="POST" class="d-inline">
-                  <button type="submit" name="application" value="<?=$results['Job_ID'];?>" class="btn btn-danger btn-sm">Apply Now</button>
-                  </form>                      
-                  </td>
-                  </tr>
-                 <?php
-                }
-                
-               }
-            
-            }
-           else if($result->num_rows < 10) {
-              $i = 0;
-              $val = $result->num_rows;
-              foreach($result as $results){
-                $i++;
-                if($i>$val){
-                  break;
-                }
-                else{
-                  ?>
-                  <tr>
-                  <td><?= $results['Job_Title']; ?></td>
-                  <td><?= $results['Company_Name']; ?></td>
-                  <td><?= $results['Location']; ?></td>
-                  <td><?= $results['Salary']; ?></td>
-                  <td><?= $results['Qualification']; ?></td>
-                  <td><?= $results['Job_Description']; ?></td>
-                  <td>
-                  <form action="code.php" method="POST" class="d-inline">
-                  <button type="submit" name="application" value="<?=$results['Job_ID'];?>" class="btn btn-danger btn-sm">Apply Now</button>
-                  </form>                      
-                  </td>
-                  </tr>
-                 <?php
-                }
 
-            }
-          }
-            else{
-              echo "<h2>No matching results found</h2>";
-            }
+
+   
+<div class="container">
+        <div class="left-nav">
+          <div class="nav-item">
+            <i class="fas fa-user"></i>
+            <a href="uProfile1.php"><span><h5>My Account</h5></span></a>
+          </div>
+          <div class="nav-item">
+            <i class="fas fa-shield-alt"></i>
+            <a href="uSecurity.php"><span><h5>Security</h5></span></a>
+          </div>
+          <div class="nav-item">
+            <i class="fas fa-bell"></i>
+            <a href="uNotif.php"><span><h5>Notifications</h5></span></a>
+          </div>
+        
+          <div class="nav-item">
+            <i class="fas fa-desktop"></i>
+            <a href="#"><span><h5>Appearance</h5></span></a>
+          </div>
          
-            
-          ?>
-      </tbody>
-    </table>
-  </div>
-  <!-- Bootstrap JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
- 
+          
+          
+          <div class="nav-item">
+            <i class="fas fa-microphone"></i>
+            <a href="#"><span><h5>View Resume</h5></span></a>
+          </div>
+          <div class="nav-item">
+            <i class="fas fa-headset"></i>
+            <a href="uApplied.php"><span><h5>Applied Jobs</h5></span></a>
+          </div>
+        </div>
 
-  </body>
-<!-- Footer Start -->
-<footer style="position:absolute;
-   bottom:0;
-" >
-  <!-- <h1>Our Policy</h1> -->
-  <div class="fotcontent">
-      <a style="font-size: 200%;" href="" class="fa-fade">Contract</a>
-      <!-- <a href="" class="fa-fade">Terms of Service</a>
-      <a href="" class="fa-fade">Privacy Policy</a>
-      <a href="" class="fa-fade">Privacy Setting</a> -->
-  </div>
-  <div class="social">
-      <a href="#" class="fa-brands fa-facebook fa-fade fa-sm"></a>
-      <a href="#" class="fa-brands fa-twitter fa-fade fa-sm"></a>
-      <a href="#" class="fa-brands fa-instagram fa-fade fa-sm"></a>
-      <a href="#" class="fa-brands fa-linkedin fa-fade fa-sm"></a>
-      <a href="#" class="fa-brands fa-snapchat fa-fade fa-sm"></a>
-      <a href="#" class="fa-brands fa-google fa-fade fa-sm"></a>
-      <a href="#" class="fa-brands fa-yahoo fa-fade fa-sm"></a>
 
-  </div>
-</footer>
-<!--  Footer End -->
+        <div class="right-content">
+            <h2 class="title">Appearance</h2>
+            <form class="form">
+              <div class="form-group">
+                <label for="username">Button for light mode and dark mode</label>
+                <input type="text" id="username" name="username" value="example_user">
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" value="example_user@example.com">
+              </div>
+              <button type="submit" class="btn">Save Changes</button>
+            </form>
+          </div>
 
-    <script src="https://kit.fontawesome.com/b2e0266282.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
+
+
+
+          <style>
+            .right-content {
+              padding: 20px;
+              background-color: #f2f2f2;
+              border-radius: 5px;
+            }
+          
+            .title {
+              font-size: 24px;
+              margin-bottom: 20px;
+            }
+          
+            .form {
+              display: flex;
+              flex-direction: column;
+            }
+          
+            .form-group {
+              margin-bottom: 15px;
+            }
+          
+            label {
+              font-weight: bold;
+            }
+          
+            input[type="text"],
+            input[type="email"],
+            input[type="password"] {
+              width: 100%;
+              padding: 10px;
+              border: 1px solid #ccc;
+              border-radius: 5px;
+              font-size: 16px;
+            }
+          
+            .btn {
+              background-color: #4CAF50;
+              color: white;
+              border: none;
+              border-radius: 5px;
+              padding: 10px 20px;
+              font-size: 16px;
+              cursor: pointer;
+            }
+          
+            .btn:hover {
+              background-color: #3e8e41;
+            }
+          </style>
+          
+      </div>
+      
+</body>
 </html>
+

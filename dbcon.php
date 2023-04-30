@@ -194,6 +194,20 @@ function getMode(){
 }
 
 
+function getModeNorm(){
+  global $con;
+  $sql = "SELECT theme FROM settings";
+  $result = $con->query($sql);
+  $row = $result->fetch_assoc(); 
+  $switchmode = $row['theme'];  
+  if ($switchmode == "1") { 
+    echo '<link rel="stylesheet" href="./css/dark.css"/>';
+  } else {
+    echo '<link rel="stylesheet" href="./css/style.css"/>';
+  }
+}
+
+
 function ugetNavMode(){
   global $con;
   $sql = "SELECT switchmode FROM temp";
