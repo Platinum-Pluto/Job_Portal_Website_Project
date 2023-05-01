@@ -90,7 +90,9 @@ background-color: transparent !important;
 }
 
 
-.container {
+
+
+.container1 {
   display: flex;
   justify-content: space-between;
   max-width: 1200px;
@@ -98,14 +100,14 @@ background-color: transparent !important;
   padding: 20px;
 }
 
-.left-nav {
+.left-nav1 {
   display: flex;
   flex-direction: column;
   gap: 10px;
   width: 200px;
 }
 
-.nav-item {
+.nav-item1 {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -117,36 +119,35 @@ background-color: transparent !important;
 }
 
 
-.nav-item.active {
+.nav-item1.active {
   background-color: #7289da;
   color: #fff;
 }
 
-.right-content {
+.right1-content {
   flex: 1;
   margin-left: 40px;
+  margin-bottom: 0;
 }
 
-.form-group {
+.form1-group {
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
 }
 
-label {
+.label1 {
   margin-bottom: 5px;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="password"] {
+.input1 {
   padding: 10px;
   border: none;
   border-radius: 5px;
   margin-bottom: 10px;
 }
 
-button[type="submit"] {
+.but1[type="submit"] {
   background-color: #7289da;
   color: #fff;
   padding: 10px 20px;
@@ -155,9 +156,10 @@ button[type="submit"] {
   cursor: pointer;
 }
 
-button[type="submit"]:hover {
+.but1:hover {
   background-color: #677bc4;
 }
+
 
 
     </style>
@@ -176,7 +178,7 @@ button[type="submit"]:hover {
           <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active link-primary" aria-current="page" href="#">Home</a>
+                <a class="nav-link active link-primary" aria-current="page" href="uIndex.php">Home</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link active link-info" href="uDiscoverJobs.php">Discover jobs</a>
@@ -285,86 +287,93 @@ button[type="submit"]:hover {
 
 
 
-   
-<div class="container">
-        <div class="left-nav">
-          <div class="nav-item">
+    <div class="container1">
+        <div class="left-nav1">
+          <div class="nav-item1">
             <i class="fas fa-user"></i>
             <a href="uProfile1.php"><span><h5>My Account</h5></span></a>
           </div>
-          <div class="nav-item">
+          <div class="nav-item1">
             <i class="fas fa-shield-alt"></i>
             <a href="uSecurity.php"><span><h5>Security</h5></span></a>
           </div>
-          <div class="nav-item">
+          <div class="nav-item1">
             <i class="fas fa-bell"></i>
             <a href="uNotif.php"><span><h5>Notifications</h5></span></a>
           </div>
-        
-          <div class="nav-item">
-            <i class="fas fa-desktop"></i>
-            <a href="uAppearance.php"><span><h5>Appearance</h5></span></a>
-          </div>
          
-          
-          
-          <div class="nav-item">
-            <i class="fas fa-microphone"></i>
-            <a href="#"><span><h5>View Resume</h5></span></a>
-          </div>
-          <div class="nav-item">
+          <div class="nav-item1">
             <i class="fas fa-headset"></i>
-            <a href="#"><span><h5>Applied Jobs</h5></span></a>
+            <a href="uApplied.php"><span><h5>Applied Jobs</h5></span></a>
           </div>
+
+          <div class="nav-item1">
+            <i class="fas fa-headset"></i>
+            <a href="uApplied.php"><span><h5>Download Resume</h5></span></a>
+          </div>
+
         </div>
 
 
-        <div class="right-content">
-            <h2 class="title">Applied Jobs</h2>
-            <form class="form">
-              <div class="form-group">
-                <label for="username">List of applied jobs here</label>
-                <input type="text" id="username" name="username" value="example_user">
-              </div>
-              <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" value="example_user@example.com">
-              </div>
-              <button type="submit" class="btn">Save Changes</button>
-            </form>
-          </div>
+       
+        <div class="right1-content">
+  <h2 class="title1">Applied Jobs</h2>
+
+    <div class="form1-group" style="height: 80%; overflow-y: auto;">
+      <label for="username">List of applied jobs here</label>
+      <?php
+        // Example list of applied jobs
+        $applied_jobs = array("Job A", "Job B", "Job C", "Job D", "Job E", "Job F", "Job G", "Job H", "Job I", "Job J");
+        foreach($applied_jobs as $job) {
+          ?>
+          <input class="input1" id="username" name="username[]" value="<?php echo $job; ?>" readonly>
+          <?php
+        }
+      ?>
+    </div>
+
+</div>
+
 
 
 
 
           <style>
-            .right-content {
-              padding: 20px;
-              background-color: #f2f2f2;
-              border-radius: 5px;
-            }
+
+.right1-content {
+  padding: 20px;
+  background-color: #f2f2f2;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+ 
+  max-height: calc(100vh - 100px);
+}
+
+.form1-group {
+  margin-bottom: auto;
+}
+
+
+
           
-            .title {
+          
+            .title1 {
               font-size: 24px;
               margin-bottom: 20px;
             }
           
-            .form {
+            .form1 {
               display: flex;
               flex-direction: column;
             }
+        
           
-            .form-group {
-              margin-bottom: 15px;
-            }
-          
-            label {
+            .label1 {
               font-weight: bold;
             }
           
-            input[type="text"],
-            input[type="email"],
-            input[type="password"] {
+            .input1 {
               width: 100%;
               padding: 10px;
               border: 1px solid #ccc;
@@ -372,7 +381,7 @@ button[type="submit"]:hover {
               font-size: 16px;
             }
           
-            .btn {
+            .btn1 {
               background-color: #4CAF50;
               color: white;
               border: none;
@@ -382,7 +391,7 @@ button[type="submit"]:hover {
               cursor: pointer;
             }
           
-            .btn:hover {
+            .btn1:hover {
               background-color: #3e8e41;
             }
           </style>
