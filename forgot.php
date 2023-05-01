@@ -1,13 +1,15 @@
+
 <?php
 session_start();
 require 'dbcon.php';
 ?>
 
 
+
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Sign Up</title>
+	<title>Login</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700">
 	<style>
@@ -19,38 +21,58 @@ require 'dbcon.php';
 		}
 
 		body {
-			background-color:azure;
-  opacity: 1;
+			background-color: #f5f5f5;
 		}
 
 		.container {
 			background-color: #fff;
 			border-radius: 10px;
 			box-shadow: 0 0 10px rgba(0,0,0,0.2);
-			margin: 50px auto;
-			max-width: 500px;
-			padding: 30px;
+			margin:10% 30%;
+			max-width: 40%;
+			padding: 50px;
 			text-align: center;
+		}
+		body {
+			background-color: lightsteelblue;
+  opacity: 1;
 		}
 		button{
 			background-color: white;
 			color: black;
 			font-size: large;
-			border: 1px solid grey;
+			border: 1px solid green;
 			padding:8px;
 			padding-left: 30px;
 			padding-right: 30px;
 			border-radius: 5px;
 		}
 	button:hover {
-  background-color: grey; 
+  background-color: green; /* Green */
   color: white;
 }
+
 		h1 {
-			color: #333;
 			font-size: 36px;
 			margin-bottom: 30px;
 			text-transform: uppercase;
+  background-image: linear-gradient(
+    -225deg,
+    #231557 0%,
+    #44107a 29%,
+    #ff1361 67%,
+    #fff800 100%);
+	  background-size: auto auto;
+  background-clip: border-box;
+  background-size: 200% auto;
+  color: #fff;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  /* animation: textclip 2s linear infinite; */
+  display: inline-block;
+	  
+	  
 		}
 
 		form input {
@@ -75,7 +97,6 @@ require 'dbcon.php';
 		form input[type="submit"]:hover {
 			background-color: #006F8F;
 		}
-	
 
 		@media screen and (max-width: 600px) {
 			.container {
@@ -84,7 +105,8 @@ require 'dbcon.php';
 			}
 		}
 
-		.forgot-password {
+
+        .forgot-password {
   margin-top: 30px;
   text-align: center;
 }
@@ -117,25 +139,24 @@ require 'dbcon.php';
 .forgot-password h6:hover {
   color: #222;
 }
+
+
+		
 	</style>
 </head>
 <body>
 	<div class="container">
-		<h1>Sign Up</h1>
-		<form  action="code.php" method="POST">
-			<input type="text"  name="NID" placeholder="NID Number">
-			<input type="text"  name="Email" placeholder="Email">
-			<input type="text"  name="User_Name" placeholder="Username">
-			<input type="text"  name="Password" placeholder="Password">
-			<input type="text" name="City" placeholder="City Name">
-			<button  type="submit" name="signup" class="btn">Create</button>
-
+    <?php include('message.php'); ?>
+		<h1>Send Password To Email</h1>
+		<form action="send_password.php" method="POST">
+            <label for="email">Enter Email:</label>
+			<input type="email" name="email" id="email" required>
+			<button type="submit" class="btn btn-primary">Send Password</button>
 		</form>
-
-		<div class="forgot-password">
-		<a href="index.php"><h6>Back To Home Page</h6></a>
+		<div class="forgot-password ">
+		<a href="userlogin.php"><h6>Back To Login Page</h6></a>
 		</div>
+	
 	</div>
 </body>
-
 </html>

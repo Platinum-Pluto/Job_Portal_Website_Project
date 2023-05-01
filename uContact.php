@@ -241,7 +241,7 @@ background-color: transparent !important;
 
 </body>
 <!-- Footer Start -->
-<footer style="position:absolute;
+<footer style="position:;
    bottom:0;
 " >
   <!-- <h1>Our Policy</h1> -->

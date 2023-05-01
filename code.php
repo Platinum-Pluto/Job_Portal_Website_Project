@@ -272,6 +272,44 @@ if(isset($_POST['userLogin']))
 
 
 
+//Applicant Forgot Password
+if(isset($_POST['forgotpw']))
+{
+   
+    $Email = mysqli_real_escape_string($con, $_POST['Email']);
+    $query = "SELECT * FROM applicant WHERE Email = '$Email'";
+    $query_run = mysqli_query($con, $query);
+    if(mysqli_num_rows($query_run) > 0)
+    { 
+    $row = mysqli_fetch_assoc($query_run);
+    $passwordVal = $row['Password'];
+    $to = $Email;
+	$subject = "Your Password";
+	$message = "Your password is: $passwordVal";
+	$headers = "From: govjob@portal.com";
+
+    if (mail($to, $subject, $message, $headers)) {
+        echo "Password sent to $Email";
+        header("Location: userlogin.php");
+        exit(0);
+    } else {
+        echo "Failed to send password";
+        header("Location: forgot.php");
+        exit(0);
+    }
+    
+
+    }
+    else
+    {
+        $_SESSION['message'] = "Email Not Found Try Again";
+        header("Location: forgot.php");
+        exit(0);
+    }
+}
+
+
+
 //Applicant Logout
 if(isset($_POST['userLogout']))
 {

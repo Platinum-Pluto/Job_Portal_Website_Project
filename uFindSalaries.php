@@ -236,7 +236,7 @@ background-color: transparent !important;
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
   </body>
 <!-- Footer Start -->
-<footer style="position:absolute;
+<footer style="position:;
    bottom:0;
 " >
   <!-- <h1>Our Policy</h1> -->

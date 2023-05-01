@@ -51,6 +51,7 @@ require 'dbcon.php';
   background-color: green; /* Green */
   color: white;
 }
+
 		h1 {
 			font-size: 36px;
 			margin-bottom: 30px;
@@ -103,6 +104,54 @@ require 'dbcon.php';
 				padding: 20px;
 			}
 		}
+
+
+
+
+
+
+.forgot-password {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.forgot-password h6 {
+  font-size: 15px;
+  color: #333;
+  text-decoration: none;
+  position: relative;
+  display: inline-block;
+  padding: 5px 20px;
+  transition: all 0.3s ease-in-out;
+}
+
+.forgot-password h6:before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background-color: #333;
+  transition: all 0.3s ease-in-out;
+}
+
+.forgot-password h6:hover:before {
+  width: 100%;
+}
+
+.forgot-password h6:hover {
+  color: #222;
+}
+
+
+
+
+
+
+
+
+		
 	</style>
 </head>
 <body>
@@ -113,6 +162,12 @@ require 'dbcon.php';
 			<input type="password" name="Password" placeholder="Password">
 			<button type="submit"  name="userLogin" class="btn btn-primary">Login</button>
 		</form>
+		<div class="forgot-password ">
+		<a href="forgot.php"><h6>Forgot Password?</h6></a>
+		</div>
+		<div class="forgot-password">
+		<a href="index.php"><h6>Back To Home Page</h6></a>
+		</div>
 	</div>
 </body>
 </html>
