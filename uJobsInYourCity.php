@@ -169,6 +169,11 @@ background-color: transparent !important;
 		                     <button style="margin-right: 18px;" type="submit"  name="userLogout" class="btn btn-danger">Log Out</button>
 		                   </form>
                       </li>
+
+                      <li class="nav-item">
+                      <a class="nav-link active link-danger" href="uProfile1.php">Profile</a>
+                    </li>
+                    
                   </ul>
             </span>
           </div>
