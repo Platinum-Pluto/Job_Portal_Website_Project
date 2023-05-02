@@ -1,159 +1,173 @@
 <?php
 
-$con = mysqli_connect("localhost","root","","job_portal");
+$con = mysqli_connect("localhost", "root", "", "job_portal");
 
-if(!$con){
-    die('Connection Failed'. mysqli_connect_error());
+if (!$con) {
+  die('Connection Failed' . mysqli_connect_error());
 }
 
 
-function searchDatabase($searchTerm) {
-    global $con;
-    $sql = "SELECT * FROM jobs WHERE (Location LIKE '%$searchTerm%' OR Job_Title LIKE '%$searchTerm%' OR Job_Description LIKE '%$searchTerm%' OR Company_Name LIKE '%$searchTerm%' OR Qualification LIKE '%$searchTerm%')";
-    $result = $con->query($sql);
-    return $result;
-  }
+function searchDatabase($searchTerm)
+{
+  global $con;
+  $sql = "SELECT * FROM jobs WHERE (Location LIKE '%$searchTerm%' OR Job_Title LIKE '%$searchTerm%' OR Job_Description LIKE '%$searchTerm%' OR Company_Name LIKE '%$searchTerm%' OR Qualification LIKE '%$searchTerm%')";
+  $result = $con->query($sql);
+  return $result;
+}
 
-  function searchSalary($searchSal) {
-    global $con;
-    $sql = "SELECT * FROM jobs WHERE Salary LIKE '%$searchSal%'";
-    $result = $con->query($sql);
-    return $result;
-  }
+function searchSalary($searchSal)
+{
+  global $con;
+  $sql = "SELECT * FROM jobs WHERE Salary LIKE '%$searchSal%'";
+  $result = $con->query($sql);
+  return $result;
+}
 
-  function searchCity($searchCity) {
-    global $con;
-    $sql = "SELECT * FROM jobs WHERE Location LIKE '%$searchCity%'";
-    $result = $con->query($sql);
-    return $result;
-  }
-
-
-  function usearchDatabase($searchTerm) {
-    global $con;
-    $sql = "SELECT * FROM jobs WHERE (Location LIKE '%$searchTerm%' OR Job_Title LIKE '%$searchTerm%' OR Job_Description LIKE '%$searchTerm%' OR Company_Name LIKE '%$searchTerm%' OR Qualification LIKE '%$searchTerm%') AND jobs.Job_ID NOT IN (SELECT Job_ID FROM apply INNER JOIN temp ON temp.User_ID = apply.User_ID)";
-    $result = $con->query($sql);
-    return $result;
-  }
-
-  function usearchSalary($searchSal) {
-    global $con;
-    $sql = "SELECT * FROM jobs WHERE Salary LIKE '%$searchSal%' AND jobs.Job_ID NOT IN (SELECT Job_ID FROM apply)";
-    $result = $con->query($sql);
-    return $result;
-  }
-
-  function usearchCity($searchCity) {
-    global $con;
-    $sql = "SELECT * FROM jobs WHERE Location LIKE '%$searchCity%' AND jobs.Job_ID NOT IN (SELECT Job_ID FROM apply)";
-    $result = $con->query($sql);
-    return $result;
-  }
-
-
-
-  function stillLoggedin(){
-    global $con;
-    $sql = "SELECT * FROM temp";
-    $result = $con->query($sql);
-    return $result;
-  }
-
-  function storeData($Email, $Password) {
-    global $con;
-    $sql0 = "SELECT User_ID, City, Password FROM applicant WHERE Email = '$Email' AND Password = '$Password'";
-    $res = $con->query($sql0);
-    if ($res->num_rows > 0) {
-        $row = $res->fetch_assoc();
-        $ID = $row['User_ID'];
-        $CITY = $row['City'];
-        $PW = $row['Password'];
-        $sql = "INSERT INTO temp (User_ID, City, Password) VALUES ('$ID', '$CITY', '$PW')";
-        $out = $con->query($sql);
-    }
+function searchCity($searchCity)
+{
+  global $con;
+  $sql = "SELECT * FROM jobs WHERE Location LIKE '%$searchCity%'";
+  $result = $con->query($sql);
+  return $result;
 }
 
 
-  function loggedOut(){
-    global $con;
-    $sql = "DELETE FROM temp";
-    $result = $con->query($sql);
+function usearchDatabase($searchTerm)
+{
+  global $con;
+  $sql = "SELECT * FROM jobs WHERE (Location LIKE '%$searchTerm%' OR Job_Title LIKE '%$searchTerm%' OR Job_Description LIKE '%$searchTerm%' OR Company_Name LIKE '%$searchTerm%' OR Qualification LIKE '%$searchTerm%') AND jobs.Job_ID NOT IN (SELECT Job_ID FROM apply INNER JOIN temp ON temp.User_ID = apply.User_ID)";
+  $result = $con->query($sql);
+  return $result;
+}
+
+function usearchSalary($searchSal)
+{
+  global $con;
+  $sql = "SELECT * FROM jobs WHERE Salary LIKE '%$searchSal%' AND jobs.Job_ID NOT IN (SELECT Job_ID FROM apply)";
+  $result = $con->query($sql);
+  return $result;
+}
+
+function usearchCity($searchCity)
+{
+  global $con;
+  $sql = "SELECT * FROM jobs WHERE Location LIKE '%$searchCity%' AND jobs.Job_ID NOT IN (SELECT Job_ID FROM apply)";
+  $result = $con->query($sql);
+  return $result;
+}
+
+
+
+function stillLoggedin()
+{
+  global $con;
+  $sql = "SELECT * FROM temp";
+  $result = $con->query($sql);
+  return $result;
+}
+
+function storeData($Email, $Password, $val)
+{
+  global $con;
+  $sql0 = "SELECT User_ID, City, Password FROM applicant WHERE Email = '$Email' AND Password = '$Password'";
+  $res = $con->query($sql0);
+  if ($res->num_rows > 0) {
+    $row = $res->fetch_assoc();
+    $ID = $row['User_ID'];
+    $CITY = $row['City'];
+    $PW = $row['Password'];
+    $sql = "INSERT INTO temp (User_ID, City, Password, switchmode) VALUES ('$ID', '$CITY', '$PW', '$val')";
+    $out = $con->query($sql);
   }
+}
 
-  function applying(){
-    global $con;
-    $sql = "SELECT * FROM temp";
-    $result = $con->query($sql);
-    return $result;
+
+function loggedOut()
+{
+  global $con;
+  $sql = "DELETE FROM temp";
+  $result = $con->query($sql);
+}
+
+function applying()
+{
+  global $con;
+  $sql = "SELECT * FROM temp";
+  $result = $con->query($sql);
+  return $result;
+}
+
+function jobsInYourcity()
+{
+  global $con;
+  $sql0 = "SELECT City FROM temp";
+  $res = $con->query($sql0);
+  if ($res->num_rows > 0) {
+    $row = $res->fetch_assoc();
+    $CITY = $row['City'];
+    $val = usearchCity($CITY);
+    return $val;
   }
-
-  function jobsInYourcity(){
-    global $con;
-    $sql0 = "SELECT City FROM temp";
-    $res = $con->query($sql0);
-    if ($res->num_rows > 0) {
-        $row = $res->fetch_assoc();
-        $CITY = $row['City'];
-        $val = usearchCity($CITY);
-        return $val;
-        }
-  }
+}
 
 
- 
- function notificationCounter(){
+
+function notificationCounter()
+{
   global $con;
   $sql = "SELECT * FROM temp";
   $res = $con->query($sql);
-  if($res->num_rows > 0){
+  if ($res->num_rows > 0) {
     $sql1 = "SELECT COUNT(Status) AS Number FROM apply NATURAL JOIN temp WHERE apply.User_ID = temp.User_ID AND apply.Notify_user = '2'";
     $count = $con->query($sql1);
-    if($count->num_rows > 0){
+    if ($count->num_rows > 0) {
       $row = $count->fetch_assoc();
       $counter = $row['Number'];
       return $counter;
-    }
-    else{
+    } else {
       return 0;
     }
   }
- }
+}
 
-function notificationSeen(){
+function notificationSeen()
+{
   global $con;
   $sql1 = "UPDATE apply SET apply.Notify_user = '1' WHERE apply.Notify_user != '0' AND apply.User_ID IN (SELECT temp.User_ID FROM temp WHERE temp.User_ID = apply.User_ID)";
   $count = $con->query($sql1);
 }
 
 
-function notifications(){
+function notifications()
+{
   global $con;
   $sql = "SELECT * FROM apply JOIN temp ON apply.User_ID = temp.User_ID JOIN jobs ON apply.Job_ID = jobs.Job_ID WHERE apply.Notify_user = '1' OR apply.Notify_user = '2' ORDER BY Admin_ID DESC";
   $res = $con->query($sql);
   return $res;
- }
+}
 
 
 
 
 
- function adminNotificationCounter(){
+function adminNotificationCounter()
+{
   global $con;
-    $sql1 = "SELECT COUNT(Notify_admin) AS Number FROM apply WHERE apply.Notify_admin = '1'";
-    $count = $con->query($sql1);
-    if($count->num_rows > 0){
-      $row = $count->fetch_assoc();
-      $counter = $row['Number'];
-      return $counter;
-    }
-    else{
-      return 0;
-    }
- }
+  $sql1 = "SELECT COUNT(Notify_admin) AS Number FROM apply WHERE apply.Notify_admin = '1'";
+  $count = $con->query($sql1);
+  if ($count->num_rows > 0) {
+    $row = $count->fetch_assoc();
+    $counter = $row['Number'];
+    return $counter;
+  } else {
+    return 0;
+  }
+}
 
 
 
- function adminNotificationSeen(){
+function adminNotificationSeen()
+{
   global $con;
   $sql1 = "UPDATE apply SET apply.Notify_admin = '2' WHERE apply.Notify_admin != '0'";
   $count = $con->query($sql1);
@@ -162,72 +176,102 @@ function notifications(){
 
 
 
-function adminNotifications(){
+function adminNotifications()
+{
   global $con;
   $sql = "SELECT * FROM  apply JOIN applicant ON apply.User_ID = applicant.User_ID JOIN jobs ON apply.Job_ID = jobs.Job_ID WHERE apply.Notify_admin = '1' OR apply.Notify_admin = '2' ORDER BY Admin_ID DESC";
   $res = $con->query($sql);
   return $res;
- }
+}
 
 
 
 
 
-  
-function getFiles($user_id){
+
+function getFiles($user_id)
+{
   global $con;
-$sql = "SELECT * FROM files WHERE User_ID = '$user_id' ";
-$result = $con->query($sql);
-return $result;
+  $sql = "SELECT * FROM files WHERE User_ID = '$user_id' ";
+  $result = $con->query($sql);
+  return $result;
 }
 
 
 
 //New Code From Here For Navbar Light/Dark Mode And uIndex.php Page Code
 
-function getMode(){
+function getMode()
+{
   global $con;
   $sql = "SELECT switchmode FROM temp";
   $result = $con->query($sql);
-  $row = $result->fetch_assoc(); 
-  return $row['switchmode']; 
+  $row = $result->fetch_assoc();
+  $switchmode = $row['switchmode'];
+  if ($switchmode == "1") {
+    echo ' href="./css/dark.css"';
+  } else {
+    echo ' href="./css/style.css"';
+  }
 }
 
 
-function getModeNorm(){
+function ugetModeNorm()
+{
+  global $con;
+  $sql = "SELECT switchmode FROM temp";
+  $result = $con->query($sql);
+  $row = $result->fetch_assoc();
+  $switchmode = $row['switchmode'];
+  if ($switchmode == "1") {
+    echo '<link rel="stylesheet" href="./css/darkprofile.css"/>';
+    echo '<link rel="stylesheet" href="./css/test.css"/>';
+  } else {
+    echo '<link rel="stylesheet" href="./css/style.css"/>';
+    echo '<link rel="stylesheet" href="./css/lightprofile.css"/>';
+  }
+}
+
+
+function getModeNorm()
+{
   global $con;
   $sql = "SELECT theme FROM settings";
   $result = $con->query($sql);
-  $row = $result->fetch_assoc(); 
-  $switchmode = $row['theme'];  
-  if ($switchmode == "1") { 
-    echo '<link rel="stylesheet" href="./css/dark.css"/>';
+  $row = $result->fetch_assoc();
+  $switchmode = $row['theme'];
+  if ($switchmode == "1") {
+    echo '<link rel="stylesheet" href="./css/test.css "/>';
   } else {
     echo '<link rel="stylesheet" href="./css/style.css"/>';
   }
 }
 
 
-function ugetNavMode(){
+
+
+function ugetNavMode()
+{
   global $con;
   $sql = "SELECT switchmode FROM temp";
   $result = $con->query($sql);
-  $row = $result->fetch_assoc(); 
-  $switchmode = $row['switchmode'];  
-  if ($switchmode == "1") { 
+  $row = $result->fetch_assoc();
+  $switchmode = $row['switchmode'];
+  if ($switchmode == "1") {
     echo ' class = "navbar navbar-expand-lg navbar-dark bg-dark"';
   } else {
     echo ' class = "navbar navbar-expand-lg bg-body-tertiary"';
   }
 }
 
-function getNavMode(){
+function getNavMode()
+{
   global $con;
   $sql = "SELECT theme FROM settings";
   $result = $con->query($sql);
-  $row = $result->fetch_assoc(); 
-  $switchmode = $row['theme'];  
-  if ($switchmode == "1") { 
+  $row = $result->fetch_assoc();
+  $switchmode = $row['theme'];
+  if ($switchmode == "1") {
     echo ' class = "navbar navbar-expand-lg navbar-dark bg-dark"';
   } else {
     echo ' class = "navbar navbar-expand-lg bg-body-tertiary"';
@@ -236,14 +280,16 @@ function getNavMode(){
 
 
 
-function getLatest(){
+function getLatest()
+{
   global $con;
   $sql = "SELECT * FROM jobs ORDER BY Job_ID DESC";
   $result = $con->query($sql);
   return $result;
 }
 
-function getLatestNews() {
+function getLatestNews()
+{
   global $con;
   $sql = "SELECT * FROM jobs ORDER BY Job_ID DESC LIMIT 3";
   $result = $con->query($sql);
@@ -260,6 +306,35 @@ function getLatestNews() {
 }
 
 
+
+
+function getTheme()
+{
+  global $con;
+  $sql = "SELECT theme FROM settings";
+  $result = $con->query($sql);
+  $row = $result->fetch_assoc();
+  $switchmode = $row['theme'];
+  if ($switchmode == "1") {
+    echo ' class="bi bi-moon"';
+  } else {
+    echo ' class="bi bi-brightness-high"';
+  }
+}
+
+function ugetTheme()
+{
+  global $con;
+  $sql = "SELECT switchmode	 FROM temp";
+  $result = $con->query($sql);
+  $row = $result->fetch_assoc();
+  $switch = $row['switchmode'];
+  if ($switch == "1") {
+    echo ' class="bi bi-moon"';
+  } else {
+    echo ' class="bi bi-brightness-high"';
+  }
+}
 
 
 

@@ -61,12 +61,16 @@ background-color: transparent !important;
     outline-color: transparent !important;
   
 }
+.btn-primary-outline {
+      background-color: transparent;
+      border-color: transparent;
+    }
 
 </style>
   </head>
     <!-- <h1>This is the title </h1> -->
 <!-- Nav Bar Start -->
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav <?php getNavMode() ?>>
         <div class="container-fluid">
         <img style="margin-right:2%;" src="./img/logo.png" alt="">
           <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -90,10 +94,12 @@ background-color: transparent !important;
                 <a class="nav-link active link-warning" href="contact.php">Contact</a>
               </li>
               <li class="nav-item">
-              <i style="font-size: 20px;
-    cursor: pointer;
-    left: 42%;
-    transform: translate(-50%, -50%);" class="bi bi-brightness-high-fill" id="toggleDark"></i>
+              <form action="code.php" method="POST">
+            <input type="hidden" name="modechange" value="Admin_index.php">
+            <button type="submit" class="btn-primary-outline"><i style="font-size: 20px;
+            cursor: pointer;
+            left: 42%" <?php getTheme() ?>></i></button>
+          </form>
               </li>
             </ul>
             <!-- Nav left side end  -->

@@ -15,7 +15,7 @@ require 'dbcon.php';
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Job search</title>
-    <link rel="stylesheet" href="./css/style.css">
+    <?php ugetModeNorm() ?>
     <script src="script.js" defer></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
@@ -72,11 +72,16 @@ background-color: transparent !important;
   
 }
 
+ .btn-primary-outline {
+      background-color: transparent;
+      border-color: transparent;
+    }
+
     </style>
 </head>
    <!-- <h1>This is the title </h1> -->
     <!-- Nav Bar Start -->
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav <?php ugetNavMode() ?>>
         <div class="container-fluid">
         <img style="margin-right:2%;" src="./img/logo.png" alt="">
           <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -100,10 +105,12 @@ background-color: transparent !important;
                 <a class="nav-link active link-warning" href="uContact.php">Contact</a>
               </li>
               <li class="nav-item">
-              <i style="font-size: 20px;
-    cursor: pointer;
-    left: 42%;
-    transform: translate(-50%, -50%);" class="bi bi-brightness-high-fill" id="toggleDark"></i>
+               <form action="code.php" method="POST">
+            <input type="hidden" name="umodechange" value="uFindSalaries.php">
+            <button type="submit" class="btn-primary-outline"><i style="font-size: 20px;
+            cursor: pointer;
+            left: 42%" <?php ugetTheme() ?>></i></button>
+              </form>
               </li>
             </ul>
             <!-- Nav left side end  -->
@@ -112,36 +119,36 @@ background-color: transparent !important;
                     <li class="nav-item">
                         <!-- Google translate -->
                         <div class="dropdown">
-		<button class="btn btn-secondary dropdown-toggle global_button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			<i class="bi bi-globe"></i>
-		</button>
-		<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="google_translate_element">
-		    <div dir="ltr" class="skiptranslate goog-te-gadget">
-		      	<span style="white-space: nowrap;">
-		        	<a class="goog-logo-link" href="http://translate.google.com" target="_blank">
-		        	</a>
-		      	</span>
-		    </div>
-	  	</div>
-	</div>
+    <button class="btn btn-secondary dropdown-toggle global_button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <i class="bi bi-globe"></i>
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="google_translate_element">
+        <div dir="ltr" class="skiptranslate goog-te-gadget">
+            <span style="white-space: nowrap;">
+              <a class="goog-logo-link" href="http://translate.google.com" target="_blank">
+              </a>
+            </span>
+        </div>
+      </div>
+  </div>
 
-  	<script>
-		$(document).ready(function(){
-		    $('.dropdown-toggle').click(function(){
-		        $('#google_translate_element').toggle();
-		    });
-		});
+    <script>
+    $(document).ready(function(){
+        $('.dropdown-toggle').click(function(){
+            $('#google_translate_element').toggle();
+        });
+    });
 
-	    function googleTranslateElementInit() {
-	      	new google.translate.TranslateElement({
-	        	pageLanguage: 'en'
-	      	}, 'google_translate_element');
-	    }
-	</script>
+      function googleTranslateElementInit() {
+          new google.translate.TranslateElement({
+            pageLanguage: 'en'
+          }, 'google_translate_element');
+      }
+  </script>
 
 
 
-	<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 
 <!-- Google translate -->
@@ -178,7 +185,7 @@ background-color: transparent !important;
       </nav>
     <!-- Nav Bar End -->
 
-<body>
+<body class="bodystyle">
 
 <form method="POST">
 	<div class="input-group rounded">
@@ -208,7 +215,7 @@ background-color: transparent !important;
             $searchSal = $_POST['searchSal'];
             $result = usearchSalary($searchSal);
             if($result->num_rows > 0) {
-              echo "<h2>Matching Results: $result->num_rows Found</h2>";
+              echo "<h2 class='match'>Matching Results: $result->num_rows Found</h2>";
               foreach($result as $results){
                 ?>
                   <tr>
@@ -229,7 +236,7 @@ background-color: transparent !important;
             
             }
             else{
-              echo "<h2>No matching results found</h2>";
+              echo "<h2 class='match'>No matching results found</h2>";
             }
            }
             
@@ -241,9 +248,7 @@ background-color: transparent !important;
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
   </body>
 <!-- Footer Start -->
-<footer style="position:;
-   bottom:0;
-" >
+<footer style="bottom:0;" >
   <!-- <h1>Our Policy</h1> -->
   <div class="fotcontent">
       <a style="font-size: 200%;" href="" class="fa-fade">Contract</a>

@@ -10,83 +10,29 @@
 <!--Iftekhar-->
 <!--NOT DONE-->
 <head>
-    <meta charset="UTF-8">
+  <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Job search</title>
-    <link rel="stylesheet" href="./css/style.css">
+    <?php ugetModeNorm()?>
     <script src="script.js" defer></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
-    <link rel="stylesheet" type="text/css" href="style.css">
+   
     
-
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 	
-    
-    
-    <style>
-          button{
-			background-color: white;
-			color: black;
-			font-size:small;
-			border: 1px solid green;
-			border-radius: 5px;
-		}
-	button:hover {
-  background-color: green; /* Green */
-  color: white;
-}
-
-.uupload{
-font-size: medium;
-margin-top: auto;
-/* background-color: none; */
-margin-bottom: auto;
-font-size: 90%;
-margin-right: 6px;
-}
-
-h1{
-  text-align: center;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 250%;
-  margin-top: 5%;
-}
-
-.global_button {
-  background-color: transparent;
-  border-color: transparent;
-}
-.global_button i {
-  color: rgb(53, 137, 247);
-}
-.global_button:hover {
-background-color: transparent;
-border-color: transparent;
-box-shadow: none;
-}
-.global_button:focus {
-box-shadow: none !important;
-outline: none;
-background-color: transparent !important;
-    border-color: transparent !important;
-    outline-color: transparent !important;
-  
-}
-
-    </style>
     <script src="functions.js"></script>
 
 
 </head>
     <!-- <h1>This is the title </h1> -->
     <!-- Nav Bar Start -->
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav <?php ugetNavMode()?>>
         <div class="container-fluid">
         <img style="margin-right:2%;" src="./img/logo.png" alt="">
           <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -110,11 +56,14 @@ background-color: transparent !important;
                 <a class="nav-link active link-warning" href="uContact.php">Contact</a>
               </li>
               <li class="nav-item">
-              <i style="font-size: 20px;
-    cursor: pointer;
-    left: 42%;
-    transform: translate(-50%, -50%);" class="bi bi-brightness-high-fill" id="toggleDark"></i>
-              </li>
+
+               <form action="code.php" method="POST">
+            <input type="hidden" name="umodechange" value="uindex.php">
+            <button type="submit" class="btn-primary-outline"><i style="font-size: 20px;
+            cursor: pointer;
+            left: 42%" <?php ugetTheme() ?>></i></button>
+              </form>
+
             </ul>
             <!-- Nav left side end  -->
             <span class="navbar-text">
@@ -125,36 +74,36 @@ background-color: transparent !important;
                         <!-- Google translate -->
 
                         <div class="dropdown">
-		<button class="btn btn-secondary dropdown-toggle global_button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			<i class="bi bi-globe"></i>
-		</button>
-		<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="google_translate_element">
-		    <div dir="ltr" class="skiptranslate goog-te-gadget">
-		      	<span style="white-space: nowrap;">
-		        	<a class="goog-logo-link" href="http://translate.google.com" target="_blank">
-		        	</a>
-		      	</span>
-		    </div>
-	  	</div>
-	</div>
+    <button class="btn btn-secondary dropdown-toggle global_button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <i class="bi bi-globe"></i>
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="google_translate_element">
+        <div dir="ltr" class="skiptranslate goog-te-gadget">
+            <span style="white-space: nowrap;">
+              <a class="goog-logo-link" href="http://translate.google.com" target="_blank">
+              </a>
+            </span>
+        </div>
+      </div>
+  </div>
 
-  	<script>
-		$(document).ready(function(){
-		    $('.dropdown-toggle').click(function(){
-		        $('#google_translate_element').toggle();
-		    });
-		});
+    <script>
+    $(document).ready(function(){
+        $('.dropdown-toggle').click(function(){
+            $('#google_translate_element').toggle();
+        });
+    });
 
-	    function googleTranslateElementInit() {
-	      	new google.translate.TranslateElement({
-	        	pageLanguage: 'en'
-	      	}, 'google_translate_element');
-	    }
-	</script>
+      function googleTranslateElementInit() {
+          new google.translate.TranslateElement({
+            pageLanguage: 'en'
+          }, 'google_translate_element');
+      }
+  </script>
 
 
 
-	<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 
 
@@ -195,11 +144,11 @@ background-color: transparent !important;
 
 
 
-   <body>
+   <body class = "bodystyle">
 
    <div class="container">
       <div class="ticker">
-        <div class="title"><p><h4>Latest Feed</h4></p></div>
+        <div class="title"><p><h4 class="match">Latest Feed</h4></p></div>
         <div class="news">
           <marquee>
           <?php 
@@ -213,7 +162,7 @@ background-color: transparent !important;
               }
           }
           $company_names = rtrim($company_names, ', ') . " are recruiting for the posts " . rtrim($posts, ', ');
-          echo "<p>" . $company_names . "</p>";
+          echo "<p class = 'match'>" . $company_names . "</p>";
           ?>
           </marquee>
         </div>
@@ -223,7 +172,7 @@ background-color: transparent !important;
 
     
    <div>
-    <p><h1>Latest Job Circulars</h1></p>
+    <p><h1 class="match">Latest Job Circulars</h1></p>
    </div>
 
   
@@ -304,7 +253,7 @@ background-color: transparent !important;
             }
           }
             else{
-              echo "<h2>No matching results found</h2>";
+              echo "<h2 class='match'>No matching results found</h2>";
             }
          
             
@@ -318,9 +267,7 @@ background-color: transparent !important;
 
   </body>
 <!-- Footer Start -->
-<footer style="position:;
-   bottom:0;
-" >
+<footer style="bottom:0;" >
   <!-- <h1>Our Policy</h1> -->
   <div class="fotcontent">
       <a style="font-size: 200%;" href="" class="fa-fade">Contract</a>
