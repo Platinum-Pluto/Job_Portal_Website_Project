@@ -18,8 +18,8 @@ if (!$conn) {
 }
 
 
-$server_Acct = "portal.govtjob@gmail.com";
-$server_Pw = "ayoetuwixzwsyket";
+$server_Acct = "";
+$server_Pw = "";
 
 //get the email address entered by the user
 $email = $_POST['email'];
