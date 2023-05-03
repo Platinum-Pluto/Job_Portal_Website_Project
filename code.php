@@ -192,15 +192,17 @@ if (isset($_POST['signup'])) {
     $Password = mysqli_real_escape_string($con, $_POST['Password']);
     $City = mysqli_real_escape_string($con, $_POST['City']);
     $switch = 0;
+    $notifSet = 0;
+    $notifSet = 0;
 
-    $query = "INSERT INTO applicant (NID,Email,User_Name,Password,City,switchmode) 
-    VALUES ('$NID','$Email','$User_Name','$Password','$City','$switch')";
+    $query = "INSERT INTO applicant (NID,Email,User_Name,Password,City,switchmode,notifSet) 
+    VALUES ('$NID','$Email','$User_Name','$Password','$City','$switch','$notifSet')";
     $query_run = mysqli_query($con, $query);
 
     if ($query_run) {
         $_SESSION['message'] = "Account Has Been Created Successfully";
         $user = 1;
-        storeData($Email, $Password, $switch);
+        storeData($Email, $Password, $switch, $notifSet);
         header("Location: uIndex.php");
         exit(0);
     } else {
@@ -221,11 +223,12 @@ if (isset($_POST['userLogin'])) {
     $query_run = mysqli_query($con, $query);
     $row = mysqli_fetch_assoc($query_run);
     $val = $row['switchmode'];
+    $notifSet = $row['notifSet'];
     if (mysqli_num_rows($query_run) > 0) {
         $_SESSION['message'] = "Login Succesful";
         $admin = 0;
         $user = 1;
-        storeData($Email, $Password, $val);
+        storeData($Email, $Password, $val, $notifSet);
         header("Location: uIndex.php");
         exit(0);
     } else {
@@ -539,6 +542,97 @@ if (isset($_POST['umodechange'])) {
         header("Location: $pageReload");
         exit(0);
     }
+}
+
+
+
+
+if (isset($_POST['update_user'])) {
+    $query1 = "SELECT User_ID FROM temp";
+    $query1_run = mysqli_query($con, $query1);
+    $row = $query1_run->fetch_assoc();
+    $User_ID = $row['User_ID'];
+    $User_Name = mysqli_real_escape_string($con, $_POST['username']);
+    $Email = mysqli_real_escape_string($con, $_POST['email']);
+
+    $query = "UPDATE applicant SET User_Name  ='$User_Name', Email ='$Email' WHERE User_ID ='$User_ID'";
+    $query_run = mysqli_query($con, $query);
+
+    if ($query_run) {
+        $_SESSION['message'] = "User Info Updated Successfully";
+        header("Location: uProfile1.php");
+        exit(0);
+    } else {
+        $_SESSION['message'] = "User Profile Not Updated";
+        header("Location: uProfile1.php");
+        exit(0);
+    }
+
+}
+
+
+
+if (isset($_POST['change_pw'])) {
+    $query1 = "SELECT User_ID FROM temp";
+    $query1_run = mysqli_query($con, $query1);
+    $row = $query1_run->fetch_assoc();
+    $User_ID = $row['User_ID'];
+    $newpw = mysqli_real_escape_string($con, $_POST['newpw']);
+    $confirmpw = mysqli_real_escape_string($con, $_POST['confirmpw']);
+
+    $query = "UPDATE applicant SET Password  ='$newpw' WHERE User_ID ='$User_ID' AND '$newpw' = '$confirmpw'";
+    $query_run = mysqli_query($con, $query);
+
+    if ($query_run) {
+        $_SESSION['message'] = "User Info Updated Successfully";
+        header("Location: uSecurity.php");
+        exit(0);
+    } else {
+        $_SESSION['message'] = "User Profile Not Updated";
+        header("Location: uSecurity.php");
+        exit(0);
+    }
+
+}
+
+
+
+if (isset($_POST['applicationIndex'])) {
+    $Job_ID = mysqli_real_escape_string($con, $_POST['applicationIndex']);
+    $Status = 1;
+    $Notify_user = 1;
+    $Notify_admin = 1;
+    $res = applying();
+    if ($res->num_rows > 0) {
+        foreach ($res as $results) {
+            $userID = $results['User_ID'];
+        }
+
+    }
+    $query = "INSERT INTO apply (Job_ID,User_ID,Status,Notify_user,Notify_admin) 
+        VALUES ('$Job_ID','$userID','$Status','$Notify_user','$Notify_admin')";
+    $query_run = mysqli_query($con, $query);
+
+
+    if ($query_run) {
+        $_SESSION['message'] = "Applied Successfully";
+        header("Location: uIndex.php");
+        exit(0);
+    } else {
+        $_SESSION['message'] = "Application Failed";
+        header("Location: uIndex.php");
+        exit(0);
+    }
+}
+
+
+
+
+if (isset($_POST['notifSettings'])) {
+    $notifValue = intval($_POST['notifval']);
+    uChangeNotif($notifValue);
+    header("Location: uNotif.php");
+    exit(0);
 }
 
 

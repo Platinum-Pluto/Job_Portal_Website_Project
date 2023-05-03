@@ -66,7 +66,7 @@ function stillLoggedin()
   return $result;
 }
 
-function storeData($Email, $Password, $val)
+function storeData($Email, $Password, $val, $notifSet)
 {
   global $con;
   $sql0 = "SELECT User_ID, City, Password FROM applicant WHERE Email = '$Email' AND Password = '$Password'";
@@ -76,7 +76,7 @@ function storeData($Email, $Password, $val)
     $ID = $row['User_ID'];
     $CITY = $row['City'];
     $PW = $row['Password'];
-    $sql = "INSERT INTO temp (User_ID, City, Password, switchmode) VALUES ('$ID', '$CITY', '$PW', '$val')";
+    $sql = "INSERT INTO temp (User_ID, City, Password, switchmode, notifSet) VALUES ('$ID', '$CITY', '$PW', '$val', '$notifSet')";
     $out = $con->query($sql);
   }
 }
@@ -117,17 +117,34 @@ function notificationCounter()
   global $con;
   $sql = "SELECT * FROM temp";
   $res = $con->query($sql);
-  if ($res->num_rows > 0) {
-    $sql1 = "SELECT COUNT(Status) AS Number FROM apply NATURAL JOIN temp WHERE apply.User_ID = temp.User_ID AND apply.Notify_user = '2'";
-    $count = $con->query($sql1);
-    if ($count->num_rows > 0) {
-      $row = $count->fetch_assoc();
-      $counter = $row['Number'];
-      return $counter;
-    } else {
-      return 0;
+  if (ugetNotifSet() == 0) {
+    if ($res->num_rows > 0) {
+      $sql1 = "SELECT COUNT(Status) AS Number FROM apply NATURAL JOIN temp WHERE apply.User_ID = temp.User_ID AND apply.Notify_user = '2'";
+      $count = $con->query($sql1);
+      if ($count->num_rows > 0) {
+        $row = $count->fetch_assoc();
+        $counter = $row['Number'];
+        return $counter;
+      } else {
+        return 0;
+      }
+    }
+  } else {
+    if ($res->num_rows > 0) {
+      $sql1 = "SELECT COUNT(Status) AS Number FROM apply NATURAL JOIN temp WHERE apply.User_ID = temp.User_ID AND apply.Notify_user = '2' AND apply.Status = '2'";
+      $count = $con->query($sql1);
+      if ($count->num_rows > 0) {
+        $row = $count->fetch_assoc();
+        $counter = $row['Number'];
+        return $counter;
+      } else {
+        return 0;
+      }
     }
   }
+
+
+
 }
 
 function notificationSeen()
@@ -141,9 +158,16 @@ function notificationSeen()
 function notifications()
 {
   global $con;
-  $sql = "SELECT * FROM apply JOIN temp ON apply.User_ID = temp.User_ID JOIN jobs ON apply.Job_ID = jobs.Job_ID WHERE apply.Notify_user = '1' OR apply.Notify_user = '2' ORDER BY Admin_ID DESC";
-  $res = $con->query($sql);
-  return $res;
+  if (ugetNotifSet() == 0) {
+    $sql = "SELECT * FROM apply JOIN temp ON apply.User_ID = temp.User_ID JOIN jobs ON apply.Job_ID = jobs.Job_ID WHERE apply.Notify_user = '1' OR apply.Notify_user = '2' ORDER BY Admin_ID DESC";
+    $res = $con->query($sql);
+    return $res;
+  } else {
+    $sql = "SELECT * FROM apply JOIN temp ON apply.User_ID = temp.User_ID JOIN jobs ON apply.Job_ID = jobs.Job_ID WHERE apply.Status = '2' AND (apply.Notify_user = '1' OR apply.Notify_user = '2') ORDER BY Admin_ID DESC";
+    $res = $con->query($sql);
+    return $res;
+  }
+
 }
 
 
@@ -337,5 +361,59 @@ function ugetTheme()
 }
 
 
+function ugetUserInfo()
+{
+  global $con;
+
+  $sql = "SELECT applicant.User_ID, applicant.User_Name, applicant.Password, 
+  applicant.Email, applicant.City, applicant.NID, applicant.switchmode 
+  FROM applicant INNER JOIN temp ON applicant.User_ID=temp.User_ID; ";
+
+  $result = $con->query($sql);
+  $row = $result->fetch_array();
+  return $row;
+}
+
+function uAppliedJobs()
+{
+
+  global $con;
+
+  $sql = "SELECT jobs.Job_Title, jobs.Company_Name FROM jobs INNER JOIN apply ON apply.Job_ID = jobs.Job_ID 
+  AND apply.User_ID IN (SELECT User_ID FROM temp)";
+
+  $result = $con->query($sql);
+  $rows = array();
+  while ($row = $result->fetch_array()) {
+    $rows[] = $row;
+  }
+  return $rows;
+}
+
+
+function ugetNotifSet()
+{
+  global $con;
+  $sql = "SELECT notifSet	 FROM temp";
+  $result = $con->query($sql);
+  $row = $result->fetch_assoc();
+  $notifysettings = $row['notifSet'];
+  return $notifysettings;
+}
+
+function uChangeNotif($change)
+{
+  global $con;  
+  $sql = "UPDATE temp SET notifSet = '$change'";
+  $con->query($sql);
+
+  $sql0 = "SELECT User_ID FROM temp";
+  $result0 = $con->query($sql0);
+  $row = $result0->fetch_assoc();
+  $uid = $row['User_ID'];
+
+  $sql1 = "UPDATE applicant SET notifSet = '$change' WHERE User_ID = '$uid'";
+  $con->query($sql1);
+}
 
 ?>

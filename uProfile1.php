@@ -192,21 +192,27 @@
         </div>
 
 
+      
         <div class="right1-content">
+
+        <?php $row = ugetUserInfo();?>
             <h2 class="title1">My Account</h2>
-            <form class="form1" class="form">
+            <form action="code.php" method="POST">
               <div class="form1-group">
                 <label class="label1" for="username">Username</label>
-                <input class="input1" type="text" id="username" name="username" value="example_user">
+                <input class="input1" type="text" name="username" value="<?= $row['User_Name']; ?>">
               </div>
               <div class="form1-group">
                 <label class="label1" for="email">Email</label>
-                <input class="input1" type="email" id="email" name="email" value="example_user@example.com">
+                <input class="input1" type="email" name="email" value="<?= $row['Email']; ?>">
               </div>
-              <button class="but1" type="submit" class="btn1">Save Changes</button>
+              <button class="but1" type="submit" class="btn1"  name="update_user">
+              Save Changes</button> 
             </form>
+
           </div>  
       </div>
+     
       
 </body>
 </html>

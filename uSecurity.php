@@ -206,20 +206,21 @@ require 'dbcon.php';
 
     <div class="right1-content">
       <h2 class="title1">Security</h2>
-      <form class="form1" class="form">
+      <?php $row = ugetUserInfo();?>
+      <form action="code.php" method="POST">
         <div class="form1-group">
           <label class="label1" for="username">Current Password</label>
-          <input class="input1" type="text" id="username" name="username" value="example_user">
+          <input class="input1"   name="username" value="<?= $row['Password']; ?>" readonly>
         </div>
         <div class="form1-group">
           <label class="label1" for="email">New Password</label>
-          <input class="input1" type="email" id="email" name="email" value="example_user@example.com">
+          <input class="input1" type="password" name="newpw" value="">
         </div>
         <div class="form1-group">
           <label class="label1" for="email">Confirm New Password</label>
-          <input class="input1" type="email" id="email" name="email" value="example_user@example.com">
+          <input class="input1" type="password" name="confirmpw" value="">
         </div>
-        <button class="but1" type="submit" class="btn1">Save Changes</button>
+        <button class="but1" type="submit" class="btn1"  name="change_pw">Save Changes</button>
       </form>
     </div>
 

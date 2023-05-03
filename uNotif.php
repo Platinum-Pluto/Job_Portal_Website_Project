@@ -215,22 +215,24 @@ require 'dbcon.php';
 
 
       <div class="form1-group">
-        <form class="form1" method="POST">
+        <form action="code.php" method="POST">
           <input type="hidden" name="action" value="my_function">
           <div class="form1-group-container">
             <h4 class="match">Get Notified For Only Accepted Jobs</h4>
-            <button type="submit" class="btn btn-primary">Apply</button>
+             <input type="hidden" name="notifval" value="1">
+            <button type="submit" name="notifSettings" class="btn btn-primary">Apply</button>
           </div>
         </form>
       </div>
 
 
       <div class="form1-group">
-        <form class="form1" method="POST">
+        <form action="code.php" method="POST">
           <input type="hidden" name="action" value="my_function">
           <div class="form1-group-container">
             <h4 class="match">Get All Notifications</h4>
-            <button type="submit" class="btn btn-primary">Apply</button>
+            <input type="hidden" name="notifval" value="0">
+             <button type="submit" name="notifSettings" class="btn btn-primary">Apply</button>
           </div>
         </form>
       </div>

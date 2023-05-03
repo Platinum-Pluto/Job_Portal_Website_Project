@@ -217,10 +217,13 @@ require 'dbcon.php';
         <label for="username">List of applied jobs here</label>
         <?php
         // Example list of applied jobs
-        $applied_jobs = array("Job A", "Job B", "Job C", "Job D", "Job E", "Job F", "Job G", "Job H", "Job I", "Job J");
-        foreach ($applied_jobs as $job) {
+        $rows = uAppliedJobs();
+
+        foreach ($rows as $row) {
           ?>
-          <input class="input1" id="username" name="username[]" value="<?php echo $job; ?>" readonly>
+          <input class="input1" id="username" name="username[]"
+            value="Applied for the post <?php echo $row['Job_Title']; ?> at <?php echo $row['Company_Name']; ?>"
+            readonly>
           <?php
         }
         ?>

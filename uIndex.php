@@ -214,7 +214,7 @@
                   <td><?= $results['Job_Description']; ?></td>
                   <td>
                   <form action="code.php" method="POST" class="d-inline">
-                  <button type="submit" name="application" value="<?=$results['Job_ID'];?>" class="btn btn-danger btn-sm">Apply Now</button>
+                  <button type="submit" name="applicationIndex" value="<?=$results['Job_ID'];?>" class="btn btn-danger btn-sm">Apply Now</button>
                   </form>                      
                   </td>
                   </tr>
@@ -243,7 +243,7 @@
                   <td><?= $results['Job_Description']; ?></td>
                   <td>
                   <form action="code.php" method="POST" class="d-inline">
-                  <button type="submit" name="application" value="<?=$results['Job_ID'];?>" class="btn btn-danger btn-sm">Apply Now</button>
+                  <button type="submit" name="applicationIndex" value="<?=$results['Job_ID'];?>" class="btn btn-danger btn-sm">Apply Now</button>
                   </form>                      
                   </td>
                   </tr>
