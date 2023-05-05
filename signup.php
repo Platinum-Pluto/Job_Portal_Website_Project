@@ -122,6 +122,7 @@ require 'dbcon.php';
 <body>
 	<div class="container">
 		<h1>Sign Up</h1>
+		<h6><?php echo $_SESSION['message'] ?></h6>
 		<form  action="code.php" method="POST">
 			<input type="text"  name="NID" placeholder="NID Number">
 			<input type="text"  name="Email" placeholder="Email">

@@ -434,5 +434,17 @@ function downloadFile()
   }
 }
 
+function nidExists($nidVal){
+  global $con;
+  $sql = "SELECT NID FROM nid WHERE NID = '$nidVal'";
+  $result = $con->query($sql);
+  if ($result->num_rows > 0) {
+    return 1;
+  } else {
+    return 0;
+  }
+
+}
+
 
 ?>

@@ -198,22 +198,29 @@ if (isset($_POST['signup'])) {
     $switch = 0;
     $notifSet = 0;
     $notifSet = 0;
-
-    $query = "INSERT INTO applicant (NID,Email,User_Name,Password,City,switchmode,notifSet) 
+    $exists = nidExists($NID);
+    if($exists != 0){
+        $query = "INSERT INTO applicant (NID,Email,User_Name,Password,City,switchmode,notifSet) 
     VALUES ('$NID','$Email','$User_Name','$Password','$City','$switch','$notifSet')";
-    $query_run = mysqli_query($con, $query);
+        $query_run = mysqli_query($con, $query);
 
-    if ($query_run) {
-        $_SESSION['message'] = "Account Has Been Created Successfully";
-        $_SESSION['user'] = 1;
-        $user = 1;
-        storeData($Email, $Password, $switch, $notifSet);
-        header("Location: uIndex.php");
-        exit(0);
-    } else {
-        $_SESSION['message'] = "Account Was Not Created";
-        $_SESSION['user'] = 0;
-        header("Location: index.php");
+        if ($query_run) {
+            $_SESSION['message'] = "Account Has Been Created Successfully";
+            $_SESSION['user'] = 1;
+            $user = 1;
+            storeData($Email, $Password, $switch, $notifSet);
+            header("Location: uIndex.php");
+            exit(0);
+        } else {
+            $_SESSION['message'] = "Account Was Not Created";
+            $_SESSION['user'] = 0;
+            header("Location: index.php");
+            exit(0);
+        }
+    }
+    else{
+        $_SESSION['message'] = "NID does not exist";
+        header("Location: signup.php");
         exit(0);
     }
 }
