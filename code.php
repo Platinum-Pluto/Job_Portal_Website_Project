@@ -198,8 +198,9 @@ if (isset($_POST['signup'])) {
     $switch = 0;
     $notifSet = 0;
     $notifSet = 0;
+    $_SESSION['message'] = "";
     $exists = nidExists($NID);
-    if($exists != 0){
+    if ($exists != 0) {
         $query = "INSERT INTO applicant (NID,Email,User_Name,Password,City,switchmode,notifSet) 
     VALUES ('$NID','$Email','$User_Name','$Password','$City','$switch','$notifSet')";
         $query_run = mysqli_query($con, $query);
@@ -217,8 +218,7 @@ if (isset($_POST['signup'])) {
             header("Location: index.php");
             exit(0);
         }
-    }
-    else{
+    } else {
         $_SESSION['message'] = "NID does not exist";
         header("Location: signup.php");
         exit(0);
