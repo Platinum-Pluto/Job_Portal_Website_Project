@@ -1,7 +1,7 @@
 <?php
     session_start();
     require 'dbcon.php';
-if ($_SESSION['user'] != 0) {
+if ($_SESSION['user'] != 1) {
   header("Location: index.php");
   exit(0);
 }
