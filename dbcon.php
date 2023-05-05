@@ -159,7 +159,7 @@ function notifications()
 {
   global $con;
   if (ugetNotifSet() == 0) {
-    $sql = "SELECT * FROM apply JOIN temp ON apply.User_ID = temp.User_ID JOIN jobs ON apply.Job_ID = jobs.Job_ID WHERE apply.Notify_user = '1' OR apply.Notify_user = '2' ORDER BY Admin_ID DESC";
+    $sql = "SELECT * FROM apply JOIN temp ON apply.User_ID = temp.User_ID JOIN jobs ON apply.Job_ID = jobs.Job_ID WHERE (apply.Status = '2' OR apply.Status = '0') AND (apply.Notify_user = '1' OR apply.Notify_user = '2') ORDER BY Admin_ID DESC";
     $res = $con->query($sql);
     return $res;
   } else {
