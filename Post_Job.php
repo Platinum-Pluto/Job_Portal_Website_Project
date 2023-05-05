@@ -1,6 +1,10 @@
 <?php
     session_start();
     require 'dbcon.php';
+if ($_SESSION['admin'] != 1) {
+  header("Location: index.php");
+  exit(0);
+}
 ?>
 
 <!--DONE-->
@@ -111,19 +115,16 @@
     </div>
     <!-- Bootstrap JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
-
+<br></br>
   </body>
 <!-- Footer Start -->
-<footer style="
-   bottom:0;margin-top:5px;
-   padding-top:5%;
-">
-  <h1>Our Policy</h1>
+<footer style="bottom:0;" >
+  <!-- <h1>Our Policy</h1> -->
   <div class="fotcontent">
-      <a href="" class="fa-fade">Contract Us</a>
-      <a href="" class="fa-fade">Terms of Service</a>
+      <a style="font-size: 200%;" href="" class="fa-fade">Contract</a>
+      <!-- <a href="" class="fa-fade">Terms of Service</a>
       <a href="" class="fa-fade">Privacy Policy</a>
-      <a href="" class="fa-fade">Privacy Setting</a>
+      <a href="" class="fa-fade">Privacy Setting</a> -->
   </div>
   <div class="social">
       <a href="#" class="fa-brands fa-facebook fa-fade fa-sm"></a>
@@ -132,7 +133,7 @@
       <a href="#" class="fa-brands fa-linkedin fa-fade fa-sm"></a>
       <a href="#" class="fa-brands fa-snapchat fa-fade fa-sm"></a>
       <a href="#" class="fa-brands fa-google fa-fade fa-sm"></a>
-      <a href="#" class="fa-brands fa-yahoo fa-fade fa-sm"></a>  
+      <a href="#" class="fa-brands fa-yahoo fa-fade fa-sm"></a>
 
   </div>
 </footer>

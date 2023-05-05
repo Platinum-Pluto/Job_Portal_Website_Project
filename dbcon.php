@@ -307,7 +307,11 @@ function getNavMode()
 function getLatest()
 {
   global $con;
-  $sql = "SELECT * FROM jobs ORDER BY Job_ID DESC";
+
+  $sql = "SELECT * FROM jobs WHERE jobs.Job_ID NOT IN 
+  (SELECT Job_ID FROM apply INNER JOIN temp ON temp.User_ID = apply.User_ID)
+  ORDER BY Job_ID DESC;";
+
   $result = $con->query($sql);
   return $result;
 }
@@ -403,7 +407,7 @@ function ugetNotifSet()
 
 function uChangeNotif($change)
 {
-  global $con;  
+  global $con;
   $sql = "UPDATE temp SET notifSet = '$change'";
   $con->query($sql);
 
@@ -415,5 +419,20 @@ function uChangeNotif($change)
   $sql1 = "UPDATE applicant SET notifSet = '$change' WHERE User_ID = '$uid'";
   $con->query($sql1);
 }
+
+
+function downloadFile()
+{
+  global $con;
+  $sql = "SELECT * FROM files NATURAL JOIN temp";
+  $result = $con->query($sql);
+  if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+   return "<a href=\"" . htmlspecialchars($row['file_path']) . "\" download><span><h5 class=\"match\">Download Resume</h5></span></a>";
+  } else {
+    return "No files found";
+  }
+}
+
 
 ?>

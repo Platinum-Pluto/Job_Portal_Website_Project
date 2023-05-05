@@ -10,7 +10,7 @@ use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 //connect to the database
-$conn = mysqli_connect("localhost","root","","job_portal");
+$conn = mysqli_connect("localhost", "root", "", "job_portal");
 
 //check for database connection errors
 if (!$conn) {
@@ -40,7 +40,7 @@ if (mysqli_num_rows($result) > 0) {
 	$message = "Your password is: $password";
 	//$headers = "From: your_email@example.com";
 
-	
+
 
 
 	$mail = new PHPMailer();
@@ -60,23 +60,23 @@ if (mysqli_num_rows($result) > 0) {
 	$mail->Password = $server_Pw;
 
 	$mail->Subject = $subject;
-//Set sender email
+	//Set sender email
 	$mail->setFrom($server_Acct);
-//Enable HTML
-	$mail->isHTML(true);	
-//Email body
-$mail->Body = "<h4>" . $message . "</h4>";
-//Add recipient
+	//Enable HTML
+	$mail->isHTML(true);
+	//Email body
+	$mail->Body = "<h4>" . $message . "</h4>";
+	//Add recipient
 	$mail->addAddress($to);
-//Finally send email
-	if ( $mail->send() ) {
+	//Finally send email
+	if ($mail->send()) {
 		echo "Email Sent";
 		$mail->smtpClose();
 		header("Location: Password_Sent.php");
 		exit(0);
 
-	}else{
-		
+	} else {
+
 		echo "Message could not be sent. Mailer Error";
 		$mail->smtpClose();
 		header("Location: userlogin.php");
@@ -85,8 +85,7 @@ $mail->Body = "<h4>" . $message . "</h4>";
 	}
 
 
-}
-else{
+} else {
 	echo "Email Does Not Exist";
 	$mail->smtpClose();
 	header("Location: userlogin.php");

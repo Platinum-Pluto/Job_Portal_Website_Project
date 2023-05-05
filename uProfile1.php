@@ -1,6 +1,10 @@
 <?php
     session_start();
     require 'dbcon.php';
+if ($_SESSION['user'] != 0) {
+  header("Location: index.php");
+  exit(0);
+}
 ?>
 
 
@@ -186,7 +190,7 @@
 
           <div class="nav-item1">
             <i class="fas fa-headset"></i>
-            <a href="uApplied.php"><span><h5 class="match">Download Resume</h5></span></a>
+            <?php echo downloadFile(); ?>
           </div>
 
         </div>

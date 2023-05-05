@@ -1,6 +1,10 @@
 <?php
     session_start();
     require 'dbcon.php';
+if ($_SESSION['user'] != 1) {
+  header("Location: index.php");
+  exit(0);
+}
 ?>
 
 
@@ -224,21 +228,21 @@ background-color: transparent !important;
 			<div class="col-md-4">
 				<div class="contact-box">
 					<!-- <i class="fas fa-phone-alt contact-icon"></i> -->
-					<p class="contact-label">Phone</p>
+					<p class="contact-label">Phone <i class="bi bi-telephone"></i></p>
 					<a href="tel:+1234567890" class="contact-text">123-456-7890</a>
 				</div>
 			</div>
       <div class="col-md-4">
 				<div class="contact-box">
 					<!-- <i class="far fa-envelope contact-icon"></i> -->
-					<p class="contact-label">Email</p>
+					<p class="contact-label">Email <i class="bi bi-envelope"></i></p>
 					<a href="mailto:info@example.com" class="contact-text">info@example.com</a>
 				</div>
 			</div>
       <div class="col-md-4">
 				<div class="contact-box">
 					<!-- <i class="fab fa-facebook-f contact-icon"></i> -->
-					<p class="contact-label">Facebook</p>
+					<p class="contact-label">Facebook <i class="bi bi-facebook"></i></p>
 					<a href="https://www.facebook.com/example" target="_blank" class="contact-text">Visit our Facebook page</a>
 				</div>
 			</div>
@@ -246,22 +250,22 @@ background-color: transparent !important;
 			<div class="col-md-4">
 				<div class="contact-box">
 					<!-- <i class="fab fa-twitter contact-icon"></i> -->
-					<p class="contact-label">Twitter</p>
+					<p class="contact-label">Twitter <i class="bi bi-twitter"></i></p>
 					<a href="https://twitter.com/example" target="_blank" class="contact-text">Follow us on Twitter</a>
 				</div>
 			</div>
       <div class="col-md-4">
 				<div class="contact-box">
 					<!-- <i class="fab fa-github contact-icon"></i> -->
-					<p class="contact-label">github</p>
+					<p class="contact-label">github <i class="bi bi-github"></i></p>
 					<a href="https://github.com/example" target="_blank" class="contact-text">Follow us on github</a>
 				</div>
 			</div>
       <div class="col-md-4">
 				<div class="contact-box">
-					<!-- <i class="fab fa-twitter contact-icon"></i> -->
-					<p class="contact-label">linkedin</p>
-					<a href="https://linkedin.com/example" target="_blank" class="contact-text">Follow us on linkedin</a>
+					
+					<p class="contact-label">YouTube <i class="bi bi-youtube"></i></p>
+					<a href="https://linkedin.com/example" target="_blank" class="contact-text">Subscribe to our YouTube channel</a>
 				</div>
 			</div>
     </div>

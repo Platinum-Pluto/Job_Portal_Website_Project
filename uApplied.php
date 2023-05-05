@@ -1,6 +1,10 @@
 <?php
 session_start();
 require 'dbcon.php';
+if ($_SESSION['user'] != 1) {
+  header("Location: index.php");
+  exit(0);
+}
 ?>
 
 
@@ -201,9 +205,7 @@ require 'dbcon.php';
 
       <div class="nav-item1">
         <i class="fas fa-headset"></i>
-        <a href="uApplied.php"><span>
-            <h5 class="match">Download Resume</h5>
-          </span></a>
+        <?php echo downloadFile(); ?>
       </div>
 
     </div>
@@ -222,8 +224,7 @@ require 'dbcon.php';
         foreach ($rows as $row) {
           ?>
           <input class="input1" id="username" name="username[]"
-            value="Applied for the post <?php echo $row['Job_Title']; ?> at <?php echo $row['Company_Name']; ?>"
-            readonly>
+            value="Applied for the post <?php echo $row['Job_Title']; ?> at <?php echo $row['Company_Name']; ?>" readonly>
           <?php
         }
         ?>

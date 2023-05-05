@@ -1,6 +1,7 @@
 <?php
     session_start();
     require 'dbcon.php';
+    
 ?>
 
  <!-- <h1>DONE </h1> -->
@@ -193,15 +194,13 @@ Find the perfect </h1>
 
   </body>
 <!-- Footer Start -->
-<footer style="
-   bottom:0;
-">
-  <h1>Our Policy</h1>
+<footer style="bottom:0;" >
+  <!-- <h1>Our Policy</h1> -->
   <div class="fotcontent">
-      <a href="" class="fa-fade">Contract Us</a>
-      <a href="" class="fa-fade">Terms of Service</a>
+      <a style="font-size: 200%;" href="" class="fa-fade">Contract</a>
+      <!-- <a href="" class="fa-fade">Terms of Service</a>
       <a href="" class="fa-fade">Privacy Policy</a>
-      <a href="" class="fa-fade">Privacy Setting</a>
+      <a href="" class="fa-fade">Privacy Setting</a> -->
   </div>
   <div class="social">
       <a href="#" class="fa-brands fa-facebook fa-fade fa-sm"></a>
@@ -210,7 +209,7 @@ Find the perfect </h1>
       <a href="#" class="fa-brands fa-linkedin fa-fade fa-sm"></a>
       <a href="#" class="fa-brands fa-snapchat fa-fade fa-sm"></a>
       <a href="#" class="fa-brands fa-google fa-fade fa-sm"></a>
-      <a href="#" class="fa-brands fa-yahoo fa-fade fa-sm"></a>  
+      <a href="#" class="fa-brands fa-yahoo fa-fade fa-sm"></a>
 
   </div>
 </footer>

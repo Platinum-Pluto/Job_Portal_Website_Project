@@ -93,11 +93,13 @@ if (isset($_POST['adminLogin'])) {
     $query_run = mysqli_query($con, $query);
     if (mysqli_num_rows($query_run) > 0) {
         $_SESSION['message'] = "Login Succesful";
+        $_SESSION['admin'] = 1;
         $admin = 1;
         header("Location: Post_Job.php");
         exit(0);
     } else {
         $_SESSION['message'] = "Login Failed";
+        $_SESSION['admin'] = 0;
         header("Location: Admin_index.php");
         exit(0);
     }
@@ -109,10 +111,12 @@ if (isset($_POST['adminLogout'])) {
     $admin = 0;
     if ($admin == 0) {
         $_SESSION['message'] = "Logout Succesfull";
+        $_SESSION['admin'] = 0;
         header("Location: Admin_index.php");
         exit(0);
     } else {
         $_SESSION['message'] = "Logout Failed";
+        $_SESSION['admin'] = 1;
         header("Location: Post_Job.php");
         exit(0);
     }
@@ -201,12 +205,14 @@ if (isset($_POST['signup'])) {
 
     if ($query_run) {
         $_SESSION['message'] = "Account Has Been Created Successfully";
+        $_SESSION['user'] = 1;
         $user = 1;
         storeData($Email, $Password, $switch, $notifSet);
         header("Location: uIndex.php");
         exit(0);
     } else {
         $_SESSION['message'] = "Account Was Not Created";
+        $_SESSION['user'] = 0;
         header("Location: index.php");
         exit(0);
     }
@@ -226,6 +232,7 @@ if (isset($_POST['userLogin'])) {
     $notifSet = $row['notifSet'];
     if (mysqli_num_rows($query_run) > 0) {
         $_SESSION['message'] = "Login Succesful";
+        $_SESSION['user'] = 1;
         $admin = 0;
         $user = 1;
         storeData($Email, $Password, $val, $notifSet);
@@ -233,6 +240,7 @@ if (isset($_POST['userLogin'])) {
         exit(0);
     } else {
         $_SESSION['message'] = "Login Failed";
+        $_SESSION['user'] = 0;
         header("Location: index.php");
         exit(0);
     }
@@ -282,10 +290,12 @@ if (isset($_POST['userLogout'])) {
         $user = 0;
         loggedOut();
         $_SESSION['message'] = "Logout Succesful";
+        $_SESSION['user'] = 0;
         header("Location: index.php");
         exit(0);
     } else {
         $_SESSION['message'] = "Logout Failed";
+        $_SESSION['user'] = 1;
         header("Location: uIndex.php");
         exit(0);
     }

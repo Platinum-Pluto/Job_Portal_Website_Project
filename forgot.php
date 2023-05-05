@@ -146,7 +146,6 @@ require 'dbcon.php';
 </head>
 <body>
 	<div class="container">
-    <?php include('message.php'); ?>
 		<h1>Send Password To Email</h1>
 		<form action="send_password.php" method="POST">
             <label for="email">Enter Email:</label>
