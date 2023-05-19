@@ -32,6 +32,7 @@ require 'dbcon.php';
 
 
 
+  <?php $vall = 1; ?>
 
   <script src="script.js" defer></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
@@ -70,6 +71,16 @@ require 'dbcon.php';
       background-color: transparent;
       border-color: transparent;
     }
+
+    <?php
+
+    $sql = "SELECT theme FROM settings";
+    $result = $con->query($sql);
+    $row = $result->fetch_assoc();
+    $switchmode = $row['theme'];
+
+
+    cssreturner($switchmode); ?>
   </style>
 
 </head>
@@ -186,79 +197,79 @@ require 'dbcon.php';
   </form>
 
 
-  <div class="container">
-    <h1 class="text-center mb-4"></h1>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Job Title</th>
-          <th>Company Name</th>
-          <th>Location</th>
-          <th>Salary</th>
-          <th>Qualification</th>
-          <th>Job Description</th>
-          <th>Apply</th>
-        </tr>
-      </thead>
-      <tbody>
-        <?php
-        if (isset($_POST['search'])) {
-          $searchTerm = $_POST['searchTerm'];
-          $result = searchDatabase($searchTerm);
-          if ($result->num_rows > 0) {
-            echo "<h2 class='match'>Matching Results: $result->num_rows Found</h2>";
-            foreach ($result as $results) {
-              ?>
-              <tr>
-                <td>
-                  <?= $results['Job_Title']; ?>
-                </td>
-                <td>
-                  <?= $results['Company_Name']; ?>
-                </td>
-                <td>
-                  <?= $results['Location']; ?>
-                </td>
-                <td>
-                  <?= $results['Salary']; ?>
-                </td>
-                <td>
-                  <?= $results['Qualification']; ?>
-                </td>
-                <td>
-                  <?= $results['Job_Description']; ?>
-                </td>
-                <td>
-
-                  <button onclick="showMessage()" class="btn btn-danger btn-sm">Apply Now</button>
-
-                </td>
-              </tr>
-              <?php
-            }
-
-          } else {
-            echo "<h2>No matching results found</h2>";
+  <div class="container py-3">
+    <div class="row">
+      <?php
+      if (isset($_POST['search'])) {
+        $searchTerm = $_POST['searchTerm'];
+        $result = searchDatabase($searchTerm);
+        if ($result->num_rows > 0) {
+          echo "<h2 class='match'>Matching Results: $result->num_rows Found</h2>";
+          echo "<br><br><br>";
+          foreach ($result as $results) {
+            ?>
+            <?php $vall = 0; ?>
+            <div class="col-md-3">
+              <div class="job-card">
+                <img src="./img/logo.png" alt="Job Image" class="job-image">
+                <div class="job-info">
+                  <p class="job-title">
+                    <?= $results['Company_Name']; ?>
+                  </p>
+                  <p class="job-description">
+                  <h6 class="job-description">
+                    <?= $results['Job_Title']; ?>
+                  </h6>
+                  </p>
+                  <details>
+                    <summary class="job-description">More Information</summary>
+                    <p class="job-description">
+                      Location :
+                      <?= $results['Location']; ?><br>
+                      Salary :
+                      <?= $results['Salary']; ?><br>
+                      Qualification:
+                      <?= $results['Qualification']; ?><br>
+                      Job Description:
+                      <?= $results['Job_Description']; ?>
+                    </p>
+                  </details><br>
+                  <div class="job-cta">
+                    <button onclick="showMessage()" class="btn btn-danger btn-sm">Apply Now</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <?php
           }
-        }
 
-        ?>
-      </tbody>
-    </table>
+        } else {
+          $vall = 1;
+          echo "<h2>No matching results found</h2>";
+        }
+      }
+
+      ?>
+    </div>
   </div>
-  <!-- Bootstrap JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
-</body>
-<!-- Footer Start -->
-<footer style="bottom:0;" >
-  <!-- <h1>Our Policy</h1> -->
-  <div class="fotcontent">
+
+
+
+
+
+
+
+
+
+
+  <!-- Footer Start -->
+  <footer style="<?php foot($vall) ?>">
+
+    <div class="fotcontent">
       <a style="font-size: 200%;" href="" class="fa-fade">Contract</a>
-      <!-- <a href="" class="fa-fade">Terms of Service</a>
-      <a href="" class="fa-fade">Privacy Policy</a>
-      <a href="" class="fa-fade">Privacy Setting</a> -->
-  </div>
-  <div class="social">
+
+    </div>
+    <div class="social">
       <a href="#" class="fa-brands fa-facebook fa-fade fa-sm"></a>
       <a href="#" class="fa-brands fa-twitter fa-fade fa-sm"></a>
       <a href="#" class="fa-brands fa-instagram fa-fade fa-sm"></a>
@@ -267,11 +278,12 @@ require 'dbcon.php';
       <a href="#" class="fa-brands fa-google fa-fade fa-sm"></a>
       <a href="#" class="fa-brands fa-yahoo fa-fade fa-sm"></a>
 
-  </div>
-</footer>
-<!--  Footer End -->
-<script src="https://kit.fontawesome.com/b2e0266282.js" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
-  integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
+    </div>
+  </footer>
+  <!--  Footer End -->
+  <script src="https://kit.fontawesome.com/b2e0266282.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
+    crossorigin="anonymous"></script>
 
 </html>

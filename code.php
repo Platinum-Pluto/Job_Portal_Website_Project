@@ -317,10 +317,6 @@ if (isset($_POST['userLogout'])) {
 
 //Discover_Apply
 if (isset($_POST['application'])) {
-    $Job_ID = mysqli_real_escape_string($con, $_POST['application']);
-    $Status = 1;
-    $Notify_user = 1;
-    $Notify_admin = 1;
     $res = applying();
     if ($res->num_rows > 0) {
         foreach ($res as $results) {
@@ -328,29 +324,44 @@ if (isset($_POST['application'])) {
         }
 
     }
-    $query = "INSERT INTO apply (Job_ID,User_ID,Status,Notify_user,Notify_admin) 
+
+    $queryforfun = "SELECT User_ID FROM files WHERE User_ID = '$userID'";
+    $queryforfunrun = mysqli_query($con, $queryforfun);
+
+    if (mysqli_num_rows($queryforfunrun) > 0) {
+        $Job_ID = mysqli_real_escape_string($con, $_POST['application']);
+        $Status = 1;
+        $Notify_user = 1;
+        $Notify_admin = 1;
+
+        $query = "INSERT INTO apply (Job_ID,User_ID,Status,Notify_user,Notify_admin) 
         VALUES ('$Job_ID','$userID','$Status','$Notify_user','$Notify_admin')";
-    $query_run = mysqli_query($con, $query);
+        $query_run = mysqli_query($con, $query);
 
 
-    if ($query_run) {
-        $_SESSION['message'] = "Applied Successfully";
-        header("Location: uDiscoverJobs.php");
-        exit(0);
+        if ($query_run) {
+            $_SESSION['message'] = "Applied Successfully";
+            header("Location: uDiscoverJobs.php");
+            exit(0);
+        } else {
+            $_SESSION['message'] = "Application Failed";
+            header("Location: uDiscoverJobs.php");
+            exit(0);
+        }
     } else {
-        $_SESSION['message'] = "Application Failed";
+        $_SESSION['message'] = "Upload Resume Before Applying!!!";
         header("Location: uDiscoverJobs.php");
         exit(0);
     }
+
+
+    
 }
 
 
 //FindSalary Apply
 if (isset($_POST['application1'])) {
-    $Job_ID = mysqli_real_escape_string($con, $_POST['application1']);
-    $Status = 1;
-    $Notify_user = 1;
-    $Notify_admin = 1;
+
     $res = applying();
     if ($res->num_rows > 0) {
         foreach ($res as $results) {
@@ -358,27 +369,39 @@ if (isset($_POST['application1'])) {
         }
 
     }
-    $query = "INSERT INTO apply (Job_ID,User_ID,Status,Notify_user,Notify_admin) 
+    $queryforfun = "SELECT User_ID FROM files WHERE User_ID = '$userID'";
+    $queryforfunrun = mysqli_query($con, $queryforfun);
+    if (mysqli_num_rows($queryforfunrun) > 0) {
+        $Job_ID = mysqli_real_escape_string($con, $_POST['application1']);
+        $Status = 1;
+        $Notify_user = 1;
+        $Notify_admin = 1;
+        $res = applying();
+        $query = "INSERT INTO apply (Job_ID,User_ID,Status,Notify_user,Notify_admin) 
          VALUES ('$Job_ID','$userID','$Status','$Notify_user','$Notify_admin')";
 
-    $query_run = mysqli_query($con, $query);
-    if ($query_run) {
-        $_SESSION['message'] = "Applied Successfully";
-        header("Location: uFindSalaries.php");
-        exit(0);
+        $query_run = mysqli_query($con, $query);
+        if ($query_run) {
+            $_SESSION['message'] = "Applied Successfully";
+            header("Location: uFindSalaries.php");
+            exit(0);
+        } else {
+            $_SESSION['message'] = "Application Failed";
+            header("Location: uFindSalaries.php");
+            exit(0);
+        }
     } else {
-        $_SESSION['message'] = "Application Failed";
+        $_SESSION['message'] = "Upload Resume Before Applying!!!";
         header("Location: uFindSalaries.php");
         exit(0);
     }
+
+   
 }
 
 //City Apply
 if (isset($_POST['application2'])) {
-    $Job_ID = mysqli_real_escape_string($con, $_POST['application2']);
-    $Status = 1;
-    $Notify_user = 1;
-    $Notify_admin = 1;
+
     $res = applying();
     if ($res->num_rows > 0) {
         foreach ($res as $results) {
@@ -386,19 +409,39 @@ if (isset($_POST['application2'])) {
         }
 
     }
-    $query = "INSERT INTO apply (Job_ID,User_ID,Status,Notify_user,Notify_admin) 
+    $queryforfun = "SELECT User_ID FROM files WHERE User_ID = '$userID'";
+    $queryforfunrun = mysqli_query($con, $queryforfun);
+    if (mysqli_num_rows($queryforfunrun) > 0) {
+        $Job_ID = mysqli_real_escape_string($con, $_POST['application2']);
+        $Status = 1;
+        $Notify_user = 1;
+        $Notify_admin = 1;
+        $res = applying();
+        if ($res->num_rows > 0) {
+            foreach ($res as $results) {
+                $userID = $results['User_ID'];
+            }
+
+        }
+        $query = "INSERT INTO apply (Job_ID,User_ID,Status,Notify_user,Notify_admin) 
          VALUES ('$Job_ID','$userID','$Status','$Notify_user','$Notify_admin')";
 
-    $query_run = mysqli_query($con, $query);
-    if ($query_run) {
-        $_SESSION['message'] = "Applied Successfully";
-        header("Location: uJobsInYourCity.php");
-        exit(0);
+        $query_run = mysqli_query($con, $query);
+        if ($query_run) {
+            $_SESSION['message'] = "Applied Successfully";
+            header("Location: uJobsInYourCity.php");
+            exit(0);
+        } else {
+            $_SESSION['message'] = "Application Failed";
+            header("Location: uJobsInYourCity.php");
+            exit(0);
+        }
     } else {
-        $_SESSION['message'] = "Application Failed";
+        $_SESSION['message'] = "Upload Resume Before Applying!!!";
         header("Location: uJobsInYourCity.php");
         exit(0);
     }
+    
 }
 
 
@@ -615,10 +658,7 @@ if (isset($_POST['change_pw'])) {
 
 
 if (isset($_POST['applicationIndex'])) {
-    $Job_ID = mysqli_real_escape_string($con, $_POST['applicationIndex']);
-    $Status = 1;
-    $Notify_user = 1;
-    $Notify_admin = 1;
+
     $res = applying();
     if ($res->num_rows > 0) {
         foreach ($res as $results) {
@@ -626,20 +666,34 @@ if (isset($_POST['applicationIndex'])) {
         }
 
     }
-    $query = "INSERT INTO apply (Job_ID,User_ID,Status,Notify_user,Notify_admin) 
+    $queryforfun = "SELECT User_ID FROM files WHERE User_ID = '$userID'";
+    $queryforfunrun = mysqli_query($con, $queryforfun);
+    if (mysqli_num_rows($queryforfunrun) > 0) {
+        $Job_ID = mysqli_real_escape_string($con, $_POST['applicationIndex']);
+        $Status = 1;
+        $Notify_user = 1;
+        $Notify_admin = 1;
+        $query = "INSERT INTO apply (Job_ID,User_ID,Status,Notify_user,Notify_admin) 
         VALUES ('$Job_ID','$userID','$Status','$Notify_user','$Notify_admin')";
-    $query_run = mysqli_query($con, $query);
+        $query_run = mysqli_query($con, $query);
 
 
-    if ($query_run) {
-        $_SESSION['message'] = "Applied Successfully";
-        header("Location: uIndex.php");
-        exit(0);
+        if ($query_run) {
+            $_SESSION['message'] = "Applied Successfully";
+            header("Location: uIndex.php");
+            exit(0);
+        } else {
+            $_SESSION['message'] = "Application Failed";
+            header("Location: uIndex.php");
+            exit(0);
+        }
     } else {
-        $_SESSION['message'] = "Application Failed";
+        $_SESSION['message'] = "Upload Resume Before Applying!!!";
         header("Location: uIndex.php");
         exit(0);
     }
+
+
 }
 
 

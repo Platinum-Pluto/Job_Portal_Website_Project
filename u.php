@@ -1,21 +1,20 @@
 <?php
 session_start();
-require 'dbcon.php';
 if ($_SESSION['user'] != 1) {
   header("Location: index.php");
   exit(0);
 }
+require 'dbcon.php';
 ?>
-
 
 
 <!DOCTYPE html>
 <html lang="en">
 
+<!--Iftekhar-->
+<!--NOT DONE-->
+
 <head>
-
-  <!--DONE BACKEND-->
-
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,73 +31,71 @@ if ($_SESSION['user'] != 1) {
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
-  <?php $vall = 1; ?>
 
+  <script src="functions.js"></script>
 
   <style>
-    button {
-      background-color: white;
-      color: black;
-      font-size: large;
-      border: 1px solid green;
-      padding: 2px;
-      padding-left: 10px;
-      padding-right: 10px;
+    .job-card {
+      background-color: #f9f9f9;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 10px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      max-width: 300px;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .job-card:hover {
+      transform: scale(1.05) translate(0, -5px);
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+    }
+
+    .job-image {
+      width: 50px;
+      height: 50px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-right: 10px;
+      flex-shrink: 0;
+    }
+
+    .job-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 5px;
+      color: #007bff;
+    }
+
+    .job-description {
+      font-size: 14px;
+      line-height: 1.5;
+      margin-bottom: 5px;
+      color: #343a40;
+    }
+
+    .job-cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .job-cta a {
+      font-weight: 600;
+      background-color: #007bff;
+      color: #fff;
+      padding: 5px 10px;
       border-radius: 5px;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
     }
 
-    button:hover {
-      background-color: green;
-      /* Green */
-      color: white;
+    .job-cta a:hover {
+      background-color: #0062cc;
+      text-decoration: none;
     }
-
-    .uupload {
-      font-size: medium;
-      margin-top: auto;
-      /* background-color: none; */
-      margin-bottom: auto;
-      font-size: 90%;
-      margin-right: 6px;
-    }
-
-    .global_button {
-      background-color: transparent;
-      border-color: transparent;
-    }
-
-    .global_button i {
-      color: rgb(53, 137, 247);
-    }
-
-    .global_button:hover {
-      background-color: transparent;
-      border-color: transparent;
-      box-shadow: none;
-    }
-
-    .global_button:focus {
-      box-shadow: none !important;
-      outline: none;
-      background-color: transparent !important;
-      border-color: transparent !important;
-      outline-color: transparent !important;
-
-    }
-    .btn-primary-outline {
-      background-color: transparent;
-      border-color: transparent;
-    }
-
-     <?php
-
-     $sql = "SELECT switchmode FROM temp";
-     $result = $con->query($sql);
-     $row = $result->fetch_assoc();
-     $switchmode = $row['switchmode'];
-
-
-     cssreturner($switchmode); ?>
   </style>
 </head>
 <!-- <h1>This is the title </h1> -->
@@ -113,7 +110,7 @@ if ($_SESSION['user'] != 1) {
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active link-primary" aria-current="page" href="uIndex.php">Home</a>
+          <a class="nav-link active link-primary" aria-current="page" href="#">Home</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active link-info" href="uDiscoverJobs.php">Discover jobs</a>
@@ -128,19 +125,23 @@ if ($_SESSION['user'] != 1) {
           <a class="nav-link active link-warning" href="uContact.php">Contact</a>
         </li>
         <li class="nav-item">
+
           <form action="code.php" method="POST">
-            <input type="hidden" name="umodechange" value="uDiscoverJobs.php">
+            <input type="hidden" name="umodechange" value="uindex.php">
             <button type="submit" class="btn-primary-outline"><i style="font-size: 20px;
             cursor: pointer;
             left: 42%" <?php ugetTheme() ?>></i></button>
           </form>
-        </li>
+
       </ul>
       <!-- Nav left side end  -->
       <span class="navbar-text">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+
           <li class="nav-item">
             <!-- Google translate -->
+
             <div class="dropdown">
               <button class="btn btn-secondary dropdown-toggle global_button" type="button" id="dropdownMenuButton"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -173,6 +174,7 @@ if ($_SESSION['user'] != 1) {
 
 
             <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 
 
             <!-- Google translate -->
@@ -213,29 +215,63 @@ if ($_SESSION['user'] != 1) {
 </nav>
 <!-- Nav Bar End -->
 
-<body class = "bodystyle">
 
-  </div>
-  <form method="POST">
-    <div class="input-group rounded">
-      <input type="text" class="form-control rounded" placeholder="Search Term" aria-label="Search"
-        aria-describedby="search-addon" name="searchTerm">
-      <button type="submit" name="search" class="btn btn-primary">Search</button>
+
+
+<body class="bodystyle">
+  <div class="container">
+    <div class="ticker">
+      <div class="title">
+        <p>
+        <h4 class="match">Latest Feed</h4>
+        </p>
+      </div>
+      <div class="news">
+        <marquee>
+          <?php
+          $value = getLatestNews();
+          $company_names = '';
+          $posts = '';
+          foreach ($value as $row) {
+            if (!empty($row['Company_Name'])) {
+              $company_names .= $row['Company_Name'] . ", ";
+              $posts .= $row['Job_Title'] . ", ";
+            }
+          }
+          $company_names = rtrim($company_names, ', ') . " are recruiting for the posts " . rtrim($posts, ', ');
+          echo "<p class = 'match'>" . $company_names . "</p>";
+          ?>
+        </marquee>
+      </div>
     </div>
-  </form>
+  </div>
 
- <div class="container py-3">
+
+
+  <div>
+    <p>
+    <h1 class="match">Latest Job Circulars</h1>
+    </p>
+  </div>
+
+
+
+  <div class="container py-3">
     <div class="row">
+
       <?php
-      if (isset($_POST['search'])) {
-        $searchTerm = $_POST['searchTerm'];
-        $result = usearchDatabase($searchTerm);
-        if ($result->num_rows > 0) {
-          echo "<h2 class='match'>Matching Results: $result->num_rows Found</h2>";
-          echo "<br><br><br>";
-          foreach ($result as $results) {
+      $result = getLatest();
+
+      if ($result->num_rows > 10) {
+        $i = 0;
+
+        foreach ($result as $results) {
+          $i++;
+          if ($i > 10) {
+            break;
+          } else {
             ?>
-            <?php $vall = 0; ?>
+
             <div class="col-md-3">
               <div class="job-card">
                 <img src="./img/logo.png" alt="Job Image" class="job-image">
@@ -244,28 +280,26 @@ if ($_SESSION['user'] != 1) {
                     <?= $results['Company_Name']; ?>
                   </p>
                   <p class="job-description">
-                  <h6 class="job-description">
+                  <h6>
                     <?= $results['Job_Title']; ?>
                   </h6>
                   </p>
                   <details>
-                    <summary class="job-description">More Information</summary>
-                    <p class="job-description">
-                      Location :
-                      <?= $results['Location']; ?><br>
-                      Salary :
-                      <?= $results['Salary']; ?><br>
-                      Qualification:
-                      <?= $results['Qualification']; ?><br>
-                      Job Description:
-                      <?= $results['Job_Description']; ?>
-                    </p>
+                    <summary>More Information</summary>
+                    Location :
+                    <?= $results['Location']; ?><br>
+                    Salary :
+                    <?= $results['Salary']; ?><br>
+                    Qualification:
+                    <?= $results['Qualification']; ?><br>
+                    Job Description:
+                    <?= $results['Job_Description']; ?>
                   </details><br>
                   <div class="job-cta">
                     <form action="code.php" method="POST" class="d-inline">
-                    <button type="submit" name="application" value="<?= $results['Job_ID']; ?>"
-                      class="btn btn-danger btn-sm">Apply Now</button>
-                  </form>
+                      <button type="submit" name="applicationIndex" value="<?= $results['Job_ID']; ?>"
+                        class="btn btn-danger btn-sm">Apply Now</button>
+                    </form>
                   </div>
                 </div>
               </div>
@@ -273,20 +307,70 @@ if ($_SESSION['user'] != 1) {
             <?php
           }
 
-        } else {
-          $vall = 1;
-          echo "<h2>No matching results found</h2>";
         }
+
+      } else if ($result->num_rows < 10) {
+        $i = 0;
+        $val = $result->num_rows;
+        foreach ($result as $results) {
+          $i++;
+          if ($i > $val) {
+            break;
+          } else {
+            ?>
+
+              <div class="col-md-3">
+                <div class="job-card">
+                  <img src="./img/logo.png" alt="Job Image" class="job-image">
+                  <div class="job-info">
+                    <p class="job-title">
+                    <?= $results['Company_Name']; ?>
+                    </p>
+                    <p class="job-description">
+                    <h6>
+                    <?= $results['Job_Title']; ?>
+                    </h6>
+                    </p>
+                    <details>
+                      <summary>More Information</summary>
+                      Location :
+                    <?= $results['Location']; ?><br>
+                      Salary :
+                    <?= $results['Salary']; ?><br>
+                      Qualification:
+                    <?= $results['Qualification']; ?><br>
+                      Job Description:
+                    <?= $results['Job_Description']; ?>
+                    </details><br>
+                    <div class="job-cta">
+                      <form action="code.php" method="POST" class="d-inline">
+                        <button type="submit" name="applicationIndex" value="<?= $results['Job_ID']; ?>"
+                          class="btn btn-danger btn-sm">Apply Now</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            <?php
+          }
+
+        }
+      } else {
+        echo "<h2 class='match'>No matching results found</h2>";
       }
+
 
       ?>
     </div>
   </div>
+  <!-- Bootstrap JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
 
-  
+
 </body>
 <!-- Footer Start -->
-<footer style="<?php foot($vall) ?>">
+<footer style="bottom:0;">
   <!-- <h1>Our Policy</h1> -->
   <div class="fotcontent">
     <a style="font-size: 200%;" href="" class="fa-fade">Contract</a>
@@ -310,18 +394,5 @@ if ($_SESSION['user'] != 1) {
 <script src="https://kit.fontawesome.com/b2e0266282.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
   integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
-<?php
-if (isset($_SESSION['message'])) {
-  $message = $_SESSION['message'];
-  unset($_SESSION['message']);
-  ?>
-  <script>
-    // JavaScript code to display the message on the screen after a delay
-    setTimeout(function () {
-      alert("<?php echo $message; ?>");
-    }, 10); 
-  </script>
-  <?php
-}
-?>
+
 </html>

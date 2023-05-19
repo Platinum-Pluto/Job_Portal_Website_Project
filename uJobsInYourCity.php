@@ -29,7 +29,7 @@ if ($_SESSION['user'] != 1) {
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
-	
+	  <?php $vall = 1; ?>
     
 
 <style>
@@ -82,7 +82,15 @@ background-color: transparent !important;
       background-color: transparent;
       border-color: transparent;
     }
+<?php
 
+$sql = "SELECT switchmode FROM temp";
+$result = $con->query($sql);
+$row = $result->fetch_assoc();
+$switchmode = $row['switchmode'];
+
+
+cssreturner($switchmode); ?>
 </style>
     <script src="functions.js"></script>
     
@@ -195,58 +203,66 @@ background-color: transparent !important;
 
 <body class = "bodystyle">
 
-   <div class="container">
-    <h1 class="text-center mb-4"></h1>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Job Title</th>
-          <th>Company Name</th>
-          <th>Location</th>
-          <th>Salary</th>
-          <th>Qualification</th>
-          <th>Job Description</th>
-          <th>Apply</th>
-        </tr>
-      </thead>
-      <tbody>
-        <?php 
-            $result = jobsInYourcity();
+   <div class="container py-3">
+    <div class="row">
+    <?php
+      $result = jobsInYourcity();
             if($result->num_rows > 0) {
-              echo "<h2 class = 'match'>Matching Results: $result->num_rows Found</h2>";
+              echo "<h2 class = 'match'>Matching Results: $result->num_rows Found<br><br></h2>";
               foreach($result as $results){
-                ?>
-                  <tr>
-                  <td><?= $results['Job_Title']; ?></td>
-                  <td><?= $results['Company_Name']; ?></td>
-                  <td><?= $results['Location']; ?></td>
-                  <td><?= $results['Salary']; ?></td>
-                  <td><?= $results['Qualification']; ?></td>
-                  <td><?= $results['Job_Description']; ?></td>
-                  <td>
-                  <form action="code.php" method="POST" class="d-inline">
-                  <button type="submit" name="application2" value="<?=$results['Job_ID'];?>" class="btn btn-danger btn-sm">Apply Now</button>
-                  </form>                            
-                  </td>
-                  </tr>
-                 <?php
-               }
-            
-            }
-            else{
-              echo "<h1 class='match'>No matching results found</h2>";
-            }
-          
-            
           ?>
-      </tbody>
-    </table>
+          <?php $vall = 0; ?>
+          <div class="col-md-3">
+            <div class="job-card">
+              <img src="./img/logo.png" alt="Job Image" class="job-image">
+              <div class="job-info">
+                <p class="job-title">
+                  <?= $results['Company_Name']; ?>
+                </p>
+                <p class="job-description">
+                <h6 class="job-description">
+                  <?= $results['Job_Title']; ?>
+                </h6>
+                </p>
+                <details>
+                  <summary class="job-description">More Information</summary>
+                  <p class="job-description">
+                    Location :
+                    <?= $results['Location']; ?><br>
+                    Salary :
+                    <?= $results['Salary']; ?><br>
+                    Qualification:
+                    <?= $results['Qualification']; ?><br>
+                    Job Description:
+                    <?= $results['Job_Description']; ?>
+                  </p>
+                </details><br>
+                <div class="job-cta">
+                 <form action="code.php" method="POST" class="d-inline">
+                  <button type="submit" name="application2" value="<?=$results['Job_ID'];?>" class="btn btn-danger btn-sm">Apply Now</button>
+                  </form>      
+                </div>
+              </div>
+            </div>
+          </div>
+          <?php
+        }
+
+      } else {
+        $vall = 1;
+        echo "<h1 class='match'>No matching results found</h2>";
+      }
+
+    ?>
   </div>
-  <!-- Bootstrap JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
-  </body>
+</div>
+
+
+</body>
+
+
 <!-- Footer Start -->
-<footer style="bottom:0;" >
+  <footer style="<?php foot($vall) ?>">
   <!-- <h1>Our Policy</h1> -->
   <div class="fotcontent">
       <a style="font-size: 200%;" href="" class="fa-fade">Contract</a>
@@ -269,4 +285,18 @@ background-color: transparent !important;
  
     <script src="https://kit.fontawesome.com/b2e0266282.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
-</html>
+<?php
+if (isset($_SESSION['message'])) {
+  $message = $_SESSION['message'];
+  unset($_SESSION['message']);
+  ?>
+  <script>
+    // JavaScript code to display the message on the screen after a delay
+    setTimeout(function () {
+      alert("<?php echo $message; ?>");
+    }, 10); 
+  </script>
+  <?php
+}
+?>
+    </html>

@@ -447,4 +447,169 @@ function nidExists($nidVal){
 }
 
 
+
+function logSign()
+{
+  global $con;
+  $sql = "SELECT theme FROM settings";
+  $result = $con->query($sql);
+  $row = $result->fetch_assoc();
+  $switchmode = $row['theme'];
+  if ($switchmode == "1") {
+    echo '<link rel="stylesheet" href="./css/darkbg.css "/>';
+  } else {
+    echo '<link rel="stylesheet" href="./css/bglight.css"/>';
+  }
+}
+
+
+function ugetLogSign()
+{
+  global $con;
+  $sql = "SELECT switchmode FROM temp";
+  $result = $con->query($sql);
+  $row = $result->fetch_assoc();
+  $switchmode = $row['switchmode'];
+  if ($switchmode == "1") {
+    echo '<link rel="stylesheet" href="./css/darkbg.css "/>';
+  } else {
+    echo '<link rel="stylesheet" href="./css/bglight.css"/>';
+  }
+}
+
+
+function cssreturner($css)
+{
+  if ($css != 1) {
+    //light
+    echo "
+  .job-card {
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    max-width: 300px;
+    transition: transform 0.3s ease-in-out;
+  }
+  .job-card:hover {
+    transform: scale(1.05) translate(0, -5px);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  .job-image {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-right: 10px;
+    flex-shrink: 0;
+  }
+  .job-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #007bff;
+  }
+  .job-description {
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 5px;
+    color: #343a40;
+  }
+  .job-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .job-cta a {
+    font-weight: 600;
+    background-color: #007bff;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+  .job-cta a:hover {
+    background-color: #0062cc;
+    text-decoration: none;
+  }";
+  } else {
+    //dark
+    echo " 
+ 
+
+ .job-card {
+  background-color: #000000;
+  box-shadow: 0 0 10px rgba(1, 255, 221, 0.87);
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  max-width: 300px;
+  transition: transform 0.3s ease-in-out;
+}
+.job-card:hover {
+  transform: scale(1.05) translate(0, -5px);
+  box-shadow: 0 0 15px rgb(1, 255, 221, 0.87);
+  z-index: 1;
+}
+.job-image {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+.job-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color:#07ffff;
+}
+.job-description {
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 5px;
+  color: #07ffff;
+}
+.job-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.job-cta a {
+  font-weight: 600;
+  background-color: #007bff;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+.job-cta a:hover {
+  background-color: #0062cc;
+  text-decoration: none;
+}
+
+";
+  }
+}
+
+
+function foot($ft)
+{
+  if ($ft == 1) {
+    echo "bottom:0; position:fixed;";
+  } else {
+    echo "bottom:0;";
+  }
+}
+
+
 ?>
