@@ -24,7 +24,6 @@ require 'dbcon.php';
 
 	<div class="login-box">
 		<h1>Sign Up</h1>
-		<h6><?php echo $_SESSION['message'] ?></h6>
 		<form  action="code.php" method="POST">
 			<div class="user-box">
 			<input type="text"  name="NID"  required="">

@@ -68,20 +68,56 @@ if (isset($_POST['add_job'])) {
     $interviewDate = mysqli_real_escape_string($con, $_POST['interviewDate']);
     $interviewTime = mysqli_real_escape_string($con, $_POST['interviewTime']);
 
-    $query = "INSERT INTO jobs (Job_Title,Job_Description,Salary,Location,Company_Name,Qualification,Interview_Date,Interview_Time) 
+    $image = time() . $_FILES["pic"]['name'];
+
+
+
+    $allowedExtensions = array("jpg", "jpeg", "png");
+
+
+
+    if (move_uploaded_file($_FILES['pic']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . '/Job_Portal_CSE347_Project/img/' . $image)) {
+        $target_file = $_SERVER['DOCUMENT_ROOT'] . '/Job_Portal_CSE347_Project/img/' . $image;
+        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+        $picname = basename($_FILES['pic']['name']);
+        $photo = time() . $picname;
+    }
+
+    if (in_array(strtolower($imageFileType), $allowedExtensions)) {
+        $query = "INSERT INTO jobs (Job_Title,Job_Description,Salary,Location,Company_Name,Qualification,Interview_Date,Interview_Time,image) 
+        VALUES ('$jobTitle','$jobDescription','$salary','$location','$companyName','$qualification','$interviewDate','$interviewTime','$photo')";
+
+        $query_run = mysqli_query($con, $query);
+        if ($query_run) {
+            $_SESSION['message'] = "Job Has Been Posted Successfully";
+            header("Location: Post_Job.php");
+            exit(0);
+        } else {
+            $_SESSION['message'] = "Job Was Not Created";
+            header("Location: Post_Job.php");
+            exit(0);
+        }
+
+    } else {
+        $query = "INSERT INTO jobs (Job_Title,Job_Description,Salary,Location,Company_Name,Qualification,Interview_Date,Interview_Time) 
         VALUES ('$jobTitle','$jobDescription','$salary','$location','$companyName','$qualification','$interviewDate','$interviewTime')";
 
-    $query_run = mysqli_query($con, $query);
-    if ($query_run) {
-        $_SESSION['message'] = "Job Has Been Posted Successfully";
-        header("Location: Post_Job.php");
-        exit(0);
-    } else {
-        $_SESSION['message'] = "Job Was Not Created";
-        header("Location: Post_Job.php");
-        exit(0);
+        $query_run = mysqli_query($con, $query);
+        if ($query_run) {
+            $_SESSION['message'] = "Job Has Been Posted Successfully";
+            header("Location: Post_Job.php");
+            exit(0);
+        } else {
+            $_SESSION['message'] = "Job Was Not Created";
+            header("Location: Post_Job.php");
+            exit(0);
+        }
     }
+
 }
+
+
+
 
 
 
@@ -355,7 +391,7 @@ if (isset($_POST['application'])) {
     }
 
 
-    
+
 }
 
 
@@ -396,7 +432,7 @@ if (isset($_POST['application1'])) {
         exit(0);
     }
 
-   
+
 }
 
 //City Apply
@@ -441,7 +477,7 @@ if (isset($_POST['application2'])) {
         header("Location: uJobsInYourCity.php");
         exit(0);
     }
-    
+
 }
 
 
@@ -705,6 +741,8 @@ if (isset($_POST['notifSettings'])) {
     header("Location: uNotif.php");
     exit(0);
 }
+
+
 
 
 ?>

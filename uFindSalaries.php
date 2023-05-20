@@ -237,7 +237,21 @@ if ($_SESSION['user'] != 1) {
             <?php $vall = 0; ?>
             <div class="col-md-3">
               <div class="job-card">
-                <img src="./img/logo.png" alt="Job Image" class="job-image">
+                <?php
+                      // Retrieve the image path and job ID from the database
+                      $imagePath = $results['image'];
+                      if (!empty($imagePath)) {
+                        // If an image is uploaded, display it
+                        ?>
+                        <img src="<?php echo 'img/' . $imagePath; ?>" alt="Job Image" class="job-image">
+                        <?php
+                      } else {
+                        // If no image is uploaded, display a default image
+                        ?>
+                        <img src="./img/logo.png" alt="Job Image" class="job-image">
+                        <?php
+                      }
+                      ?>
                 <div class="job-info">
                   <p class="job-title">
                     <?= $results['Company_Name']; ?>
@@ -316,14 +330,18 @@ if ($_SESSION['user'] != 1) {
 if (isset($_SESSION['message'])) {
   $message = $_SESSION['message'];
   unset($_SESSION['message']);
-  ?>
-  <script>
-    // JavaScript code to display the message on the screen after a delay
-    setTimeout(function () {
-      alert("<?php echo $message; ?>");
-    }, 10); 
-  </script>
-  <?php
+  if ($message == "Upload Resume Before Applying!!!") {
+
+
+    ?>
+    <script>
+      // JavaScript code to display the message on the screen after a delay
+      setTimeout(function () {
+        alert("<?php echo $message; ?>");
+      }, 10); 
+    </script>
+    <?php
+  }
 }
 ?>
 </html>
