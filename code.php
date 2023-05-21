@@ -536,9 +536,11 @@ if (isset($_POST['submit'])) {
 
         } else {
             echo "Sorry, there was an error uploading your file.";
+            header("Location: uIndex.php");
         }
     } else {
         echo "Sorry, only JPG, JPEG, PNG, GIF, PDF, TXT, DOC, and DOCX files are allowed.";
+        header("Location: uIndex.php");
     }
 }
 
@@ -554,10 +556,12 @@ if (isset($_POST['adminClear'])) {
     if ($result) {
         echo "Notifications cleared successfully!";
         header("Location: admin_notification.php");
+        exit(0);
 
     } else {
         echo "Error clearing notifications: " . mysqli_error($con);
         header("Location: admin_notification.php");
+        exit(0);
     }
 }
 
@@ -572,9 +576,11 @@ if (isset($_POST['userClear'])) {
     if ($result) {
         echo "Notifications cleared successfully!";
         header("Location: uNotifications.php");
+        exit(0);
     } else {
         echo "Error clearing notifications: " . mysqli_error($con);
         header("Location: uNotifications.php");
+        exit(0);
     }
 }
 

@@ -212,7 +212,7 @@ require 'dbcon.php';
     <div class="row">
       <?php
       $result = getLatest();
-      if ($result->num_rows > 10) {
+      if ($result->num_rows >= 10) {
         $i = 0;
         foreach ($result as $results) {
           $i++;

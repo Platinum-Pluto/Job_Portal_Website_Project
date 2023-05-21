@@ -253,7 +253,7 @@ require 'dbcon.php';
 </body>
 
 <!-- Footer Start -->
-<footer style="bottom:0;" >
+<footer style="<?php foot($vall) ?>">
   <!-- <h1>Our Policy</h1> -->
   <div class="fotcontent">
       <a style="font-size: 200%;" href="" class="fa-fade">Contract</a>

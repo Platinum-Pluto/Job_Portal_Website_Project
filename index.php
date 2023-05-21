@@ -196,7 +196,8 @@ require 'dbcon.php';
     <h1
       style="font-size: 150%; margin-top:5%; margin-bottom:2%; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
       How to create an account ?</h1>
-    <iframe width="500" height="250" src="https://www.youtube.com/embed/Jm0MLlE4x0U" title="YouTube video player"
+
+    <iframe width="500" height="250" src=" https://youtube.com/embed/6tg22han6rU" title="YouTube video player"
       frameborder="0"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
       allowfullscreen></iframe>
