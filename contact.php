@@ -87,7 +87,8 @@ require 'dbcon.php';
       outline-color: transparent !important;
 
     }
-      .btn-primary-outline {
+
+    .btn-primary-outline {
       background-color: transparent;
       border-color: transparent;
     }
@@ -199,56 +200,57 @@ require 'dbcon.php';
 </nav>
 <!-- Nav Bar End -->
 
-<body class="bodystyle">         
-<div class="container py-3">
-		<div class="row">
-			<div class="col-md-4">
-				<div class="contact-box">
-					<!-- <i class="fas fa-phone-alt contact-icon"></i> -->
-					<p class="contact-label">Phone <i class="bi bi-telephone"></i></p>
-					<a href="tel:+1234567890" class="contact-text">123-456-7890</a>
-				</div>
-			</div>
+<body class="bodystyle">
+  <div class="container py-3">
+    <div class="row">
       <div class="col-md-4">
-				<div class="contact-box">
-					<!-- <i class="far fa-envelope contact-icon"></i> -->
-					<p class="contact-label">Email <i class="bi bi-envelope"></i></p>
-					<a href="mailto:info@example.com" class="contact-text">info@example.com</a>
-				</div>
-			</div>
+        <div class="contact-box">
+          <!-- <i class="fas fa-phone-alt contact-icon"></i> -->
+          <p class="contact-label">Phone <i class="bi bi-telephone"></i></p>
+          <a href="tel:+8801234567891" class="contact-text">+8801234567891</a>
+        </div>
+      </div>
       <div class="col-md-4">
-				<div class="contact-box">
-					<!-- <i class="fab fa-facebook-f contact-icon"></i> -->
-					<p class="contact-label">Facebook <i class="bi bi-facebook"></i></p>
-					<a href="https://www.facebook.com/example" target="_blank" class="contact-text">Visit our Facebook page</a>
-				</div>
-			</div>
-      	
-			<div class="col-md-4">
-				<div class="contact-box">
-					<!-- <i class="fab fa-twitter contact-icon"></i> -->
-					<p class="contact-label">Twitter <i class="bi bi-twitter"></i></p>
-					<a href="https://twitter.com/example" target="_blank" class="contact-text">Follow us on Twitter</a>
-				</div>
-			</div>
+        <div class="contact-box">
+          <!-- <i class="far fa-envelope contact-icon"></i> -->
+          <p class="contact-label">Email <i class="bi bi-envelope"></i></p>
+          <a href="mailto:portal.govtjob@gmail.com" class="contact-text">portal.govtjob@gmail.com</a>
+        </div>
+      </div>
       <div class="col-md-4">
-				<div class="contact-box">
-					<!-- <i class="fab fa-github contact-icon"></i> -->
-					<p class="contact-label">github <i class="bi bi-github"></i></p>
-					<a href="https://github.com/example" target="_blank" class="contact-text">Follow us on github</a>
-				</div>
-			</div>
+        <div class="contact-box">
+          <!-- <i class="fab fa-facebook-f contact-icon"></i> -->
+          <p class="contact-label">Facebook <i class="bi bi-facebook"></i></p>
+          <a href="https://www.facebook.com/example" target="_blank" class="contact-text">Visit our Facebook page</a>
+        </div>
+      </div>
+
       <div class="col-md-4">
-				<div class="contact-box">
-					
-					<p class="contact-label">YouTube <i class="bi bi-youtube"></i></p>
-					<a href="https://linkedin.com/example" target="_blank" class="contact-text">Subscribe to our YouTube channel</a>
-				</div>
-			</div>
+        <div class="contact-box">
+          <!-- <i class="fab fa-twitter contact-icon"></i> -->
+          <p class="contact-label">Twitter <i class="bi bi-twitter"></i></p>
+          <a href="https://twitter.com/govtjob_portal" target="_blank" class="contact-text">Follow us on Twitter</a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="contact-box">
+          <!-- <i class="fab fa-github contact-icon"></i> -->
+          <p class="contact-label">Github <i class="bi bi-github"></i></p>
+          <a href="https://github.com/Platinum-Pluto" target="_blank" class="contact-text">Follow us on github</a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="contact-box">
+
+          <p class="contact-label">YouTube <i class="bi bi-youtube"></i></p>
+          <a href="https://www.youtube.com/@Govt_jobportal/about" target="_blank" class="contact-text">Subscribe to our
+            YouTube channel</a>
+        </div>
+      </div>
     </div>
   </div>
-        <!-- Bootstrap JS -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+  <!-- Bootstrap JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
 
 </body>
 
@@ -256,19 +258,19 @@ require 'dbcon.php';
 <footer style="<?php foot($vall) ?>">
   <!-- <h1>Our Policy</h1> -->
   <div class="fotcontent">
-      <a style="font-size: 200%;" href="" class="fa-fade">Contract</a>
-      <!-- <a href="" class="fa-fade">Terms of Service</a>
+    <a style="font-size: 200%;" href="" class="fa-fade">Contract</a>
+    <!-- <a href="" class="fa-fade">Terms of Service</a>
       <a href="" class="fa-fade">Privacy Policy</a>
       <a href="" class="fa-fade">Privacy Setting</a> -->
   </div>
   <div class="social">
-      <a href="#" class="fa-brands fa-facebook fa-fade fa-sm"></a>
-      <a href="#" class="fa-brands fa-twitter fa-fade fa-sm"></a>
-      <a href="#" class="fa-brands fa-instagram fa-fade fa-sm"></a>
-      <a href="#" class="fa-brands fa-linkedin fa-fade fa-sm"></a>
-      <a href="#" class="fa-brands fa-snapchat fa-fade fa-sm"></a>
-      <a href="#" class="fa-brands fa-google fa-fade fa-sm"></a>
-      <a href="#" class="fa-brands fa-yahoo fa-fade fa-sm"></a>
+    <a href="https://www.facebook.com/example" class="fa-brands fa-facebook fa-fade fa-sm"></a>
+    <a href="https://twitter.com/govtjob_portal" class="fa-brands fa-twitter fa-fade fa-sm"></a>
+    <a href="#" class="fa-brands fa-instagram fa-fade fa-sm"></a>
+    <a href="https://discord.gg/ZNs75Drx" class="fa-brands fa-discord fa-fade fa-sm"></a>
+    <a href="#" class="fa-brands fa-snapchat fa-fade fa-sm"></a>
+    <a href="portal.govtjob@gmail.com" class="fa-brands fa-google fa-fade fa-sm"></a>
+    <a href="portal.govtjob@gmail.com" class="fa-brands fa-yahoo fa-fade fa-sm"></a>
 
   </div>
 </footer>

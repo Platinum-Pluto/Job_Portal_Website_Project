@@ -229,14 +229,14 @@ background-color: transparent !important;
 				<div class="contact-box">
 					<!-- <i class="fas fa-phone-alt contact-icon"></i> -->
 					<p class="contact-label">Phone <i class="bi bi-telephone"></i></p>
-					<a href="tel:+1234567890" class="contact-text">123-456-7890</a>
+					<a href="tel:+8801234567891" class="contact-text">+8801234567891</a>
 				</div>
 			</div>
       <div class="col-md-4">
 				<div class="contact-box">
 					<!-- <i class="far fa-envelope contact-icon"></i> -->
 					<p class="contact-label">Email <i class="bi bi-envelope"></i></p>
-					<a href="mailto:info@example.com" class="contact-text">info@example.com</a>
+					<a href="mailto:portal.govtjob@gmail.com" class="contact-text">portal.govtjob@gmail.com</a>
 				</div>
 			</div>
       <div class="col-md-4">
@@ -251,21 +251,21 @@ background-color: transparent !important;
 				<div class="contact-box">
 					<!-- <i class="fab fa-twitter contact-icon"></i> -->
 					<p class="contact-label">Twitter <i class="bi bi-twitter"></i></p>
-					<a href="https://twitter.com/example" target="_blank" class="contact-text">Follow us on Twitter</a>
+					<a href="https://twitter.com/govtjob_portal" target="_blank" class="contact-text">Follow us on Twitter</a>
 				</div>
 			</div>
       <div class="col-md-4">
 				<div class="contact-box">
 					<!-- <i class="fab fa-github contact-icon"></i> -->
 					<p class="contact-label">github <i class="bi bi-github"></i></p>
-					<a href="https://github.com/example" target="_blank" class="contact-text">Follow us on github</a>
+					<a href="https://github.com/Platinum-Pluto" target="_blank" class="contact-text">Follow us on github</a>
 				</div>
 			</div>
       <div class="col-md-4">
 				<div class="contact-box">
 					
 					<p class="contact-label">YouTube <i class="bi bi-youtube"></i></p>
-					<a href="https://linkedin.com/example" target="_blank" class="contact-text">Subscribe to our YouTube channel</a>
+					<a href="https://www.youtube.com/@Govt_jobportal/about" target="_blank" class="contact-text">Subscribe to our YouTube channel</a>
 				</div>
 			</div>
     </div>
@@ -284,13 +284,13 @@ background-color: transparent !important;
       <a href="" class="fa-fade">Privacy Setting</a> -->
   </div>
   <div class="social">
-      <a href="#" class="fa-brands fa-facebook fa-fade fa-sm"></a>
-      <a href="#" class="fa-brands fa-twitter fa-fade fa-sm"></a>
+      <a href="https://www.facebook.com/example" class="fa-brands fa-facebook fa-fade fa-sm"></a>
+      <a href="https://twitter.com/govtjob_portal" class="fa-brands fa-twitter fa-fade fa-sm"></a>
       <a href="#" class="fa-brands fa-instagram fa-fade fa-sm"></a>
-      <a href="#" class="fa-brands fa-linkedin fa-fade fa-sm"></a>
+      <a href="https://discord.gg/ZNs75Drx" class="fa-brands fa-discord fa-fade fa-sm"></a>
       <a href="#" class="fa-brands fa-snapchat fa-fade fa-sm"></a>
-      <a href="#" class="fa-brands fa-google fa-fade fa-sm"></a>
-      <a href="#" class="fa-brands fa-yahoo fa-fade fa-sm"></a>
+      <a href="portal.govtjob@gmail.com" class="fa-brands fa-google fa-fade fa-sm"></a>
+      <a href="portal.govtjob@gmail.com" class="fa-brands fa-yahoo fa-fade fa-sm"></a>
 
   </div>
 </footer>
