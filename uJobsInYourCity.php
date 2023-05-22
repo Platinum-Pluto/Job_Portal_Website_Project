@@ -120,14 +120,14 @@ cssreturner($switchmode); ?>
               <li class="nav-item">
                 <a class="nav-link active link-warning" href="uContact.php">Contact</a>
               </li>
-              <li class="nav-item">
-             <form action="code.php" method="POST">
-            <input type="hidden" name="umodechange" value="jobsInYourCity.php">
+                <li class="nav-item">
+          <form action="code.php" method="POST">
+            <input type="hidden" name="umodechange" value="uJobsInYourCity.php">
             <button type="submit" class="btn-primary-outline"><i style="font-size: 20px;
             cursor: pointer;
             left: 42%" <?php ugetTheme() ?>></i></button>
-            </form>
-              </li>
+                  </form>
+                </li>
             </ul>
             <!-- Nav left side end  -->
             <span class="navbar-text">
